@@ -83,16 +83,6 @@
             <div id="quickSearchResults" class="hidden max-h-[220px] overflow-y-auto divide-y-2 divide-[#4A3F35] border-3 border-[#4A3F35] rounded-lg bg-white shadow-[2px_2px_0px_0px_rgba(74,63,53,0.1)]">
                 <!-- JS 即時生成項目 -->
             </div>
-
-            <!-- 姓氏快篩橫向滾動列 -->
-            <div class="space-y-1">
-                <p class="text-[10px] font-black text-stone-500 tracking-wider">按姓氏快速篩選：</p>
-                <div class="overflow-x-auto hide-scrollbar -mx-1 px-1">
-                    <div id="surnameContainer" class="flex gap-2 pb-1 whitespace-nowrap">
-                        <!-- JS 自動分析並填充 -->
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- 宴會廳地圖區域 -->
@@ -154,7 +144,7 @@
         <div class="bg-[#F4EAE6] p-4 rounded-xl border-4 border-[#4A3F35] shadow-[4px_4px_0px_0px_rgba(74,63,53,0.15)] space-y-4">
             <div class="border-b-4 border-[#4A3F35] pb-2 text-center">
                 <h3 class="text-base font-black tracking-widest text-[#4A3F35]">✨ 婚宴席位名冊大覽 ✨</h3>
-                <p class="text-[9px] text-[#4A3F35]/70 font-bold">點擊下方任何桌號或人名，地圖會自動對應定位</p>
+                <p class="text-[9px] text-[#4A3F35]/70 font-bold">點擊下方 any 桌號或人名，地圖會自動對應定位</p>
             </div>
 
             <div id="classicTableList" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
@@ -204,7 +194,6 @@
         const canvasWrapper = document.getElementById('canvasWrapper');
 
         function init() {
-            renderSurnames();
             renderClassicTableList();
             drawMap();
             animatePulse();
@@ -242,37 +231,6 @@
             } else {
                 clearSearchBtn.classList.add('hidden');
             }
-        }
-
-        // 提取所有賓客的第一個字作為「姓氏快篩按鈕」
-        function renderSurnames() {
-            const surnames = new Set();
-            Object.values(tables).forEach(t => {
-                t.guests.forEach(g => {
-                    if (g.length > 0 && g !== "Sean") {
-                        // 處理包含夫妻的情況
-                        const cleanName = g.replace("夫妻", "");
-                        surnames.add(cleanName[0]);
-                    }
-                });
-            });
-
-            const sortedSurnames = Array.from(surnames).sort();
-            const container = document.getElementById('surnameContainer');
-            
-            container.innerHTML = sortedSurnames.map(s => `
-                <button onclick="quickFilterSurname('${s}')" 
-                    class="px-3.5 py-1.5 bg-white hover:bg-[#4A3F35] hover:text-white active:scale-95 border-2 border-[#4A3F35] text-xs font-bold text-[#4A3F35] rounded-lg transition-all shadow-[1px_1px_0px_0px_rgba(74,63,53,1)]">
-                    ${s} 氏
-                </button>
-            `).join('');
-        }
-
-        function quickFilterSurname(surname) {
-            searchInput.value = surname;
-            toggleClearButton(surname);
-            handleSearch(surname);
-            searchInput.focus();
         }
 
         // 搜尋演算法（相容模糊搜尋與夫妻合併姓名處理）
