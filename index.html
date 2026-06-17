@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡愛盛宴 | 手機互動式婚宴席位引導系統</title>
+    <!-- 引入 Tailwind CSS 與 優雅字型 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C5A059;       /* 溫潤香檳金 */
+            --primary-light: #F9F6F0; /* 暖柔沙色 */
+            --dark: #2C2C2C;          /* 深炭灰 */
+            --accent-red: #A32A2A;    /* 尊榮主桌紅 */
+        }
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background-color: var(--primary-light);
+            color: var(--dark);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        /* 美化手機版水平滾動條 */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #EFEAE3;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C5A059;
+            border-radius: 2px;
+        }
+        /* 脈衝動畫效果 */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .active-pulse {
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-100">
+
+    <!-- 頂部精緻 Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-stone-100 py-4 px-4 sticky top-0 z-40 shadow-sm text-center">
+        <h1 class="text-xl md:text-2xl font-bold tracking-[0.2em] text-stone-800">婚宴席位導覽</h1>
+        <p class="serif-title italic text-amber-600/80 text-xs tracking-widest mt-0.5">THE WEDDING SEATING GUIDE</p>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-6 space-y-6">
+        
+        <!-- 核心搜尋區域：輸入名字就可以了 -->
+        <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-stone-100/80 space-y-4">
+            <div class="text-center md:text-left">
+                <h2 class="text-lg font-bold text-stone-800">🔍 輸入您的名字快速找位</h2>
+                <p class="text-xs text-stone-400 mt-1">無需查找整張表，只需輸入姓氏或全名即可</p>
+            </div>
+            
+            <div class="relative">
+                <input type="text" id="nameSearchInput" placeholder="請輸入姓名（例如：洪國憲、Sean）..." 
+                    class="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:ring-4 focus:ring-amber-500/10 focus:border-amber-600 outline-none transition-all text-base text-stone-800 font-medium placeholder-stone-400">
+                <span class="absolute right-4 top-4 text-stone-400 pointer-events-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
+            </div>
+
+            <!-- 智慧型即時搜尋結果清單 -->
+            <div id="quickSearchResults" class="hidden max-h-[220px] overflow-y-auto divide-y divide-stone-100 border border-stone-100 rounded-xl bg-white shadow-inner">
+                <!-- 由 JS 即時生成匹配的賓客項目 -->
+            </div>
+
+            <!-- 常見姓氏快速點擊按鈕 -->
+            <div class="space-y-1.5">
+                <p class="text-[11px] font-bold text-stone-400 uppercase tracking-wider">熱門姓氏快篩</p>
+                <div id="surnameContainer" class="flex flex-wrap gap-1.5">
+                    <!-- 由 JS 自動分析賓客名單生成 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 互動地圖區域 (手機版可左右滑動，並會自動對齊桌位) -->
+        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-stone-100/80 space-y-3">
+            <div class="flex justify-between items-center text-xs text-stone-400">
+                <span class="font-bold tracking-wider">🗺️ 宴會廳配置示意圖</span>
+                <span class="md:hidden flex items-center gap-1 text-amber-600 font-semibold animate-pulse">左右滑動探索 ↔</span>
+            </div>
+            
+            <!-- 水平滾動的外容器 -->
+            <div id="canvasWrapper" class="overflow-x-auto custom-scrollbar rounded-xl border border-stone-100 bg-stone-50/50 scroll-smooth">
+                <div class="relative" style="width: 820px; height: 500px;">
+                    <canvas id="responsiveCanvas" width="820" height="500" class="block cursor-pointer"></canvas>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-[11px] pt-1 border-t border-stone-50">
+                <span class="flex items-center gap-1.5"><i class="w-3 h-3 rounded-full bg-red-800"></i> 主桌</span>
+                <span class="flex items-center gap-1.5"><i class="w-3 h-3 rounded-full bg-stone-400"></i> 一般席次</span>
+                <span class="flex items-center gap-1.5"><i class="w-3 h-3 rounded-full border border-amber-500 bg-amber-50"></i> 預備桌</span>
+                <span class="flex items-center gap-1.5"><i class="w-3.5 h-3.5 rounded-full bg-stone-200 text-stone-600 font-bold flex items-center justify-center scale-90">↑</i> 出入口</span>
+            </div>
+        </div>
+
+        <!-- 桌位詳細導引與同桌貴賓卡片 -->
+        <div id="guideSection" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100/80 transition-all duration-300 min-h-[160px] flex flex-col justify-center">
+            <!-- 預設狀態 -->
+            <div id="guidePlaceholder" class="text-center py-6 text-stone-400 space-y-2">
+                <div class="text-4xl">🥂</div>
+                <p class="text-sm">在上方輸入名字，或直接點選地圖上的桌號</p>
+                <p class="text-xs text-stone-300">我們將會立刻為您指示引導路線</p>
+            </div>
+
+            <!-- 啟動狀態（手機底部卡片樣式） -->
+            <div id="guideContent" class="hidden space-y-4">
+                <div class="flex justify-between items-start border-b border-stone-100 pb-3">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 id="targetTableName" class="text-2xl font-bold text-stone-800"></h3>
+                            <span id="targetTableBadge" class="text-[11px] px-2.5 py-0.5 rounded-full font-bold"></span>
+                        </div>
+                        <p class="text-xs text-stone-400 mt-1">已為您規劃最佳行走路線</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] text-stone-400 uppercase tracking-wider">最佳入口</span>
+                        <span id="suggestedEntrance" class="font-bold text-amber-700 text-sm"></span>
+                    </div>
+                </div>
+
+                <!-- 貼心引導說明 -->
+                <div class="bg-amber-50/50 p-4 rounded-xl border-l-4 border-amber-500 space-y-1">
+                    <p class="text-xs font-bold text-amber-800 flex items-center gap-1">🚶 路線指引</p>
+                    <p id="guideRouteText" class="text-xs md:text-sm leading-relaxed text-stone-600 font-medium"></p>
+                </div>
+
+                <!-- 同桌貴賓 -->
+                <div class="space-y-2">
+                    <p class="text-xs font-bold text-stone-400 tracking-wider">📋 同桌貴賓 (對照 婚宴席位圖.jpg)</p>
+                    <div id="tableGuestList" class="flex flex-wrap gap-1.5 max-h-[110px] overflow-y-auto pr-1">
+                        <!-- 同桌名單 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 精緻底部 -->
+    <footer class="bg-stone-900 text-stone-400/80 py-8 text-center mt-12 border-t-2 border-amber-600/30">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="serif-title tracking-[0.4em] text-xs font-bold text-amber-500/80">BEST WISHES TO THE NEWLYWEDS</p>
+            <p class="text-[10px] tracking-widest text-stone-500">提供快速席次檢索服務 | 簡化流程 專注幸福</p>
+        </div>
+    </footer>
+
+    <script>
+        // 對照 婚宴席位圖.jpg 的原始真實數據
+        const tables = {
+            "M": { id: "M", name: "主桌", type: "main", guests: ["洪國憲", "洪蘊美", "洪承緯", "劉書念", "劉偉祥", "劉榮子", "劉慶昌", "劉金蘭", "林國光", "余細美"], x: 195, y: 240, entrance: "left", guide: "從左側出入口（灰色標記）進入後向左直走，鄰近舞台旁的大圓桌即是尊榮主桌。" },
+            "2": { id: "2", name: "2號桌", type: "guest", guests: ["陳進一", "李春金", "周秀玲", "李慶鳳", "謝春花", "李慶福", "李玉娟", "賴忠賢", "賴金英", "劉芝姍"], x: 340, y: 110, entrance: "left", guide: "從左側出入口進入後直走到底，靠近舞台方向第一排右側。" },
+            "3": { id: "3", name: "3號桌", type: "guest", guests: ["潘金花", "劉慶榮", "劉宸維", "劉睿哲", "潘秋麗", "石剛位", "劉慶星", "劉慶星配偶", "王文賓", "王文賓配偶"], x: 340, y: 180, entrance: "left", guide: "從左側出入口進入後直行，主桌正後方第一排左側。" },
+            "4": { id: "4", name: "4號桌", type: "guest", guests: ["林新禧", "吳青芬", "林柏廷", "林柏佑", "林新智", "陳育卿", "林品諺", "林品誠", "劉書亞", "張智堯"], x: 340, y: 300, entrance: "left", guide: "由左側出入口進入，走道左手邊第二排第一桌（靠中央走道）。" },
+            "5": { id: "5", name: "5號桌", type: "guest", guests: ["胡安生", "胡傑倫", "胡志豪", "胡雁容", "張湘濤", "張林梅", "蘇裕淵", "蘇燕萍", "蘇愛真", "蘇愛理"], x: 340, y: 370, entrance: "left", guide: "左側出入口進入即達，靠近大門左側第一桌。" },
+            "6": { id: "6", name: "6號桌", type: "guest", guests: ["洪啟翔", "洪萱魴", "洪浩程", "洪鐿綺", "幸秉憲", "幸敏環", "林金文", "林保暻", "莊幸雄", "莊綺諼"], x: 465, y: 110, entrance: "left", guide: "從左側出入口進入直行至走道，左轉至第二列左側位置。" },
+            "7": { id: "7", name: "7號桌", type: "guest", guests: ["劉凱逸", "劉兆葦", "高智誠", "田詩妤", "李俊福", "李傑瑞", "高路得", "蘇秀蓮", "廖惠如", "曾淑玲"], x: 465, y: 180, entrance: "left", guide: "由左側出入口進入，位於中央走道左側第二排位置。" },
+            "8": { id: "8", name: "8號桌", type: "guest", guests: ["高俊雄", "高瑤瑤", "高澤安", "高緹恩", "林子航", "林慧瑄", "李淑惠", "晨曦", "邱子辰", "官郁均"], x: 465, y: 300, entrance: "right", guide: "由右側進場口（粉紅標記）進入，位於中央走道右側第二排位置。" },
+            "9": { id: "9", name: "9號桌", type: "guest", guests: ["Sean", "李凱琳", "施晴", "施愛", "李俊豪", "李惠子", "李言希", "李語妃", "高淑珍", "高淑美"], x: 465, y: 370, entrance: "right", guide: "由右側進場口進入，位於進場右轉走道第二列位置。" },
+            "10": { id: "10", name: "10號桌", type: "guest", guests: ["黃聖元", "黃心惠", "楊華甸", "彭振宏", "廖子君", "張嘉成", "戴安毅", "幸秉文", "沈中華", "莊博允"], x: 590, y: 110, entrance: "right", guide: "由右側進場口進入，於前方走道右轉，位於後排最內側位置。" },
+            "11": { id: "11", name: "11號桌", type: "guest", guests: ["楊綏湄", "塗綰葶", "陳姿涵", "許霈晴", "蔡汶邦", "周柄君", "吳宇瞻", "吳岱融", "李珮晴", "丁元閔"], x: 590, y: 180, entrance: "right", guide: "由右側進場口直行過走道，位於中央走道右側第三排。" },
+            "12": { id: "12", name: "12號桌", type: "guest", guests: ["李星華", "李政偉", "李惠敏", "鍾宇平", "鍾心敏", "林睿凡", "林汶其", "黃隆盛", "張智超", "張嘉樺"], x: 590, y: 300, entrance: "right", guide: "由右側進場口進入，位於走道右側第三排位置。" },
+            "13": { id: "13", name: "13號桌", type: "guest", guests: ["許舒涵", "林景麗", "黃瑄", "何寧禎", "黃婷評", "牟明柔", "陳映綺", "李詩璇", "莊思華", "莊思語"], x: 590, y: 370, entrance: "right", guide: "右側進場口進入，位於右手邊最靠近大門的第三桌。" },
+            "14": { id: "14", name: "14號桌", type: "guest", guests: ["鄒文中", "鄒淑惠", "林文宇", "林茜晨", "何友彰", "莊榮國", "莊春妹"], x: 715, y: 110, entrance: "right", guide: "由右側進場口進入直行到底，位於後排最外側靠牆位置。" },
+            "15": { id: "15", name: "預備桌", type: "backup", guests: [], x: 715, y: 180, entrance: "right", guide: "位於右側進場口直走第四排最外側靠牆位置（目前設定為預備桌）。" }
+        };
+
+        let selectedTableId = null;
+        let pulseStep = 0;
+        let animationFrameId = null;
+
+        const canvas = document.getElementById('responsiveCanvas');
+        const ctx = canvas.getContext('2d');
+        const searchInput = document.getElementById('nameSearchInput');
+        const quickResults = document.getElementById('quickSearchResults');
+        const canvasWrapper = document.getElementById('canvasWrapper');
+
+        function init() {
+            renderSurnames();
+            drawMap();
+            animatePulse();
+
+            // 事件監聽
+            searchInput.addEventListener('input', (e) => handleSearch(e.target.value));
+            canvas.addEventListener('click', handleCanvasClick);
+            
+            // 點擊外部關閉搜尋結果
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !quickResults.contains(e.target)) {
+                    quickResults.classList.add('hidden');
+                }
+            });
+        }
+
+        // 分析所有來賓姓名，取出不重複的姓氏
+        function renderSurnames() {
+            const surnames = new Set();
+            Object.values(tables).forEach(t => {
+                t.guests.forEach(g => {
+                    if (g.length > 0 && g !== "Sean") {
+                        surnames.add(g[0]); // 取第一個字作為姓氏
+                    }
+                });
+            });
+
+            const sortedSurnames = Array.from(surnames).sort();
+            const container = document.getElementById('surnameContainer');
+            
+            container.innerHTML = sortedSurnames.map(s => `
+                <button onclick="quickFilterSurname('${s}')" 
+                    class="px-2.5 py-1 bg-stone-100 hover:bg-amber-600 hover:text-white border border-stone-200 text-xs font-medium text-stone-600 rounded-lg transition-all">
+                    ${s}
+                </button>
+            `).join('');
+        }
+
+        // 點擊快篩姓氏
+        function quickFilterSurname(surname) {
+            searchInput.value = surname;
+            handleSearch(surname);
+            searchInput.focus();
+        }
+
+        // 搜尋邏輯
+        function handleSearch(query) {
+            const val = query.trim().toLowerCase();
+            if (!val) {
+                quickResults.classList.add('hidden');
+                return;
+            }
+
+            const matches = [];
+            Object.values(tables).forEach(t => {
+                t.guests.forEach(g => {
+                    if (g.toLowerCase().includes(val)) {
+                        matches.push({ name: g, tableId: t.id, tableName: t.name });
+                    }
+                });
+            });
+
+            if (matches.length > 0) {
+                quickResults.classList.remove('hidden');
+                quickResults.innerHTML = matches.map(m => `
+                    <div onclick="selectGuest('${m.tableId}', '${m.name}')" 
+                        class="px-5 py-3.5 hover:bg-amber-50 cursor-pointer flex justify-between items-center transition-colors">
+                        <div>
+                            <span class="font-bold text-stone-800 text-base">${m.name}</span>
+                            <span class="text-xs text-stone-400 ml-2">安排在 ${m.tableName}</span>
+                        </div>
+                        <span class="text-xs font-bold text-amber-600">看位置 →</span>
+                    </div>
+                `).join('');
+            } else {
+                quickResults.classList.remove('hidden');
+                quickResults.innerHTML = `
+                    <div class="px-5 py-6 text-center text-stone-400 text-sm">
+                        找不到符合「${query}」的賓客姓名
+                    </div>
+                `;
+            }
+        }
+
+        // 選擇賓客
+        function selectGuest(tableId, guestName) {
+            quickResults.classList.add('hidden');
+            selectTable(tableId, guestName);
+        }
+
+        // 核心：選取桌位並平滑滾動（手機版亮點）
+        function selectTable(id, highlightGuestName = null) {
+            selectedTableId = id;
+            const table = tables[id];
+
+            // 1. 切換下方詳細資訊卡片內容
+            const placeholder = document.getElementById('guidePlaceholder');
+            const content = document.getElementById('guideContent');
+            placeholder.classList.add('hidden');
+            content.classList.remove('hidden');
+
+            document.getElementById('targetTableName').innerText = table.name;
+            
+            const badge = document.getElementById('targetTableBadge');
+            if (table.type === 'main') {
+                badge.innerText = "主桌尊榮席";
+                badge.className = "text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-red-100 text-red-800";
+            } else if (table.type === 'backup') {
+                badge.innerText = "預備席";
+                badge.className = "text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-stone-100 text-stone-500";
+            } else {
+                badge.innerText = "貴賓席";
+                badge.className = "text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-amber-50 text-amber-800";
+            }
+
+            document.getElementById('suggestedEntrance').innerText = table.entrance === 'left' ? '左側出入口 (灰)' : '右側進場口 (粉)';
+            document.getElementById('guideRouteText').innerText = table.guide;
+
+            // 渲染同桌貴賓名單並高亮搜尋的人
+            const guestListDiv = document.getElementById('tableGuestList');
+            if (table.guests.length > 0) {
+                guestListDiv.innerHTML = table.guests.map(g => `
+                    <span class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${g === highlightGuestName ? 'bg-amber-600 text-white shadow-sm scale-105 font-bold' : 'bg-stone-100 text-stone-600'}">
+                        ${g}
+                    </span>
+                `).join('');
+            } else {
+                guestListDiv.innerHTML = `<span class="text-stone-400 text-xs italic">此為預備席，無指定座位</span>`;
+            }
+
+            // 2. 移動手機端地圖捲軸至選取桌位中心
+            const wrapperWidth = canvasWrapper.clientWidth;
+            const targetScrollX = table.x - (wrapperWidth / 2);
+            canvasWrapper.scrollTo({
+                left: targetScrollX,
+                behavior: 'smooth'
+            });
+
+            // 重新繪製地圖
+            drawMap();
+        }
+
+        // 點擊地圖桌子
+        function handleCanvasClick(e) {
+            const rect = canvas.getBoundingClientRect();
+            // 由於 Canvas 大小固定為 820 * 500，需依據螢幕實際顯示比例換算座標
+            const x = (e.clientX - rect.left) * (820 / rect.width);
+            const y = (e.clientY - rect.top) * (500 / rect.height);
+
+            let clickedTableId = null;
+            Object.values(tables).forEach(table => {
+                const radius = table.type === 'main' ? 38 : 30;
+                const dist = Math.sqrt((x - table.x)**2 + (y - table.y)**2);
+                if (dist <= radius) {
+                    clickedTableId = table.id;
+                }
+            });
+
+            if (clickedTableId) {
+                selectTable(clickedTableId);
+            }
+        }
+
+        // 繪製地圖
+        function drawMap() {
+            ctx.clearRect(0, 0, 820, 500);
+
+            // 1. 舞台區域 (Stage)
+            ctx.fillStyle = '#EBE7E0';
+            ctx.fillRect(40, 80, 90, 310);
+            ctx.strokeStyle = '#D1C9BC';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(40, 80, 90, 310);
+            ctx.fillStyle = '#6E6454';
+            ctx.font = 'bold 16px Noto Serif TC';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('舞 台', 85, 235);
+
+            // 2. 音控室 (Sound Booth)
+            ctx.fillStyle = '#E8E4DD';
+            ctx.fillRect(40, 400, 90, 45);
+            ctx.strokeRect(40, 400, 90, 45);
+            ctx.fillStyle = '#8C8375';
+            ctx.font = '12px Noto Serif TC';
+            ctx.fillText('音 控', 85, 422);
+
+            // 3. 中央走道 (Walkway)
+            ctx.strokeStyle = '#D6CEB2';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 6]);
+            ctx.beginPath();
+            ctx.moveTo(150, 240);
+            ctx.lineTo(800, 240);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = '#9C917C';
+            ctx.font = 'bold 11px Noto Serif TC';
+            ctx.fillText('中 央 紅 毯 走 道', 480, 240);
+
+            // 4. 下方出入口標示 (Entrances)
+            // 左側出入口 (灰色圓圈)
+            ctx.fillStyle = '#D1D5DB';
+            ctx.beginPath();
+            ctx.arc(260, 465, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#374151';
+            ctx.font = 'bold 11px Noto Serif TC';
+            ctx.fillText('↑ 出入口 (左)', 260, 490);
+
+            // 右側進場口 (粉紅色圓圈)
+            ctx.fillStyle = '#FF69B4';
+            ctx.beginPath();
+            ctx.arc(590, 465, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#C2185B';
+            ctx.font = 'bold 11px Noto Serif TC';
+            ctx.fillText('↑ 進場口 (右)', 590, 490);
+
+            // 5. 動態導航路徑線 (Guide Line)
+            if (selectedTableId) {
+                const target = tables[selectedTableId];
+                const startX = target.entrance === 'left' ? 260 : 590;
+                const startY = 465;
+
+                ctx.beginPath();
+                ctx.strokeStyle = '#C5A059';
+                ctx.lineWidth = 3;
+                ctx.setLineDash([5, 4]);
+                ctx.moveTo(startX, startY);
+
+                // 從出入口引導至走道，再分支到桌位
+                if (target.y < 240) {
+                    // 上半排
+                    ctx.lineTo(startX, 240);
+                    ctx.lineTo(target.x, 240);
+                } else {
+                    // 下半排
+                    ctx.lineTo(startX, 335);
+                    ctx.lineTo(target.x, 335);
+                }
+                ctx.lineTo(target.x, target.y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // 6. 繪製所有桌位
+            Object.values(tables).forEach(table => {
+                const isSelected = selectedTableId === table.id;
+                const radius = table.type === 'main' ? 35 : 27;
+
+                // 繪製選取時的脈衝環動畫
+                if (isSelected) {
+                    ctx.beginPath();
+                    ctx.arc(table.x, table.y, radius + 4 + Math.sin(pulseStep) * 3, 0, Math.PI * 2);
+                    ctx.strokeStyle = '#C5A059';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                // 陰影
+                ctx.beginPath();
+                ctx.arc(table.x, table.y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = isSelected ? 'rgba(197, 160, 89, 0.15)' : 'rgba(0, 0, 0, 0.03)';
+                ctx.fill();
+
+                // 桌子本體
+                ctx.beginPath();
+                ctx.arc(table.x, table.y, radius - 2, 0, Math.PI * 2);
+                
+                if (table.type === 'main') {
+                    ctx.fillStyle = isSelected ? '#8B0000' : '#A32A2A'; // 主桌紅
+                    ctx.strokeStyle = '#6B1212';
+                } else if (table.type === 'backup') {
+                    ctx.fillStyle = isSelected ? '#C5A059' : '#F4F2EE'; // 預備桌
+                    ctx.strokeStyle = '#D1C9BC';
+                } else {
+                    ctx.fillStyle = isSelected ? '#C5A059' : '#FFFFFF'; // 普通桌
+                    ctx.strokeStyle = isSelected ? '#B28F46' : '#E0DCD5';
+                }
+                ctx.lineWidth = isSelected ? 3.5 : 1.5;
+                ctx.fill();
+                ctx.stroke();
+
+                // 繪製桌名文字
+                if (table.type === 'main') {
+                    ctx.fillStyle = '#FFFFFF';
+                } else {
+                    ctx.fillStyle = isSelected ? '#FFFFFF' : '#3D3D3D';
+                }
+                ctx.font = table.type === 'main' ? 'bold 13px Noto Serif TC' : 'bold 12px Noto Serif TC';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                if (table.type === 'backup') {
+                    ctx.fillStyle = isSelected ? '#FFFFFF' : '#8C8375';
+                    ctx.font = '10px Noto Serif TC';
+                    ctx.fillText('預備桌', table.x, table.y);
+                } else {
+                    ctx.fillText(table.name, table.x, table.y);
+                }
+            });
+        }
+
+        // 動態脈衝動畫循環
+        function animatePulse() {
+            pulseStep += 0.08;
+            drawMap();
+            animationFrameId = requestAnimationFrame(animatePulse);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
