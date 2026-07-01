@@ -3,41 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>婚宴席位表 | 娜魯灣大酒店</title>
-    <!-- 引入 Tailwind CSS 與 Google Fonts: Fredoka (圓潤潮流英體) & Noto Sans TC (黑體) -->
+    <title>婚宴席位表 | 娜路彎大酒店 (台東蔚藍版)</title>
+    <!-- 引入 Tailwind CSS 與 Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --y2k-yellow: #FFF600;       /* 潮流霓虹黃 */
-            --y2k-pink: #FF33B5;         /* 芭比霓虹粉 */
-            --y2k-green: #39FFA0;        /* 霓虹綠 */
-            --y2k-blue: #3CC0FF;         /* 蔚藍 */
-            --brutal-black: #000000;     /* 粗黑線條 */
+            /* 台東蔚藍海岸風格 CSS 變數 */
+            --theme-bg: #F0F9FF;          /* 海水蔚藍底色 */
+            --theme-card: #FFFFFF;        /* 純白卡片 */
+            --theme-text: #0F172A;        /* 深海藍/午夜藍文字 */
+            --theme-border-color: #0F172A;/* 高對比深邃框線 */
+            --theme-border-class: 3px solid #0F172A;
+            --theme-shadow: 5px 5px 0px 0px #0F172A;
+            --theme-radius: 1rem;
+            --theme-font: 'Noto Sans TC', sans-serif;
+            --theme-subtext: #475569;     /* 灰藍色副文本 */
+            --theme-accent-color: #0284C7;/* 湛藍色高亮 */
+            --theme-accent-secondary: #BAE6FD; /* 淺海藍色 */
         }
+
+        /* 響應式與過渡特效 */
         body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--y2k-yellow);
-            color: var(--brutal-black);
+            font-family: var(--theme-font);
+            background-color: var(--theme-bg);
+            color: var(--theme-text);
+            transition: background-color 0.4s ease, color 0.4s ease, font-family 0.4s ease;
             -webkit-tap-highlight-color: transparent;
         }
-        .font-fredoka {
-            font-family: 'Fredoka', sans-serif;
+
+        .theme-card {
+            background-color: var(--theme-card);
+            border: var(--theme-border-class);
+            box-shadow: var(--theme-shadow);
+            border-radius: var(--theme-radius);
+            color: var(--theme-text);
+            transition: all 0.3s ease;
         }
-        /* 橫向滾動條美化 (Y2K 粉綠色調) */
+
+        .theme-accent-btn {
+            background-color: var(--theme-accent-color);
+            color: #FFFFFF;
+            border: var(--theme-border-class);
+            box-shadow: var(--theme-shadow);
+            border-radius: calc(var(--theme-radius) * 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .theme-accent-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        .theme-input {
+            background-color: #FFFFFF;
+            color: #000000;
+            border: var(--theme-border-class);
+            border-radius: calc(var(--theme-radius) * 0.8);
+            transition: all 0.3s ease;
+        }
+
+        /* 橫向滾動條美化 (台東蔚藍色調) */
         .custom-scrollbar::-webkit-scrollbar {
             height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #FFFFFF;
-            border: 2px solid var(--brutal-black);
+            border: 1px solid var(--theme-border-color);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--y2k-pink);
-            border: 2px solid var(--brutal-black);
+            background: var(--theme-accent-color);
+            border: 1px solid var(--theme-border-color);
             border-radius: 99px;
         }
-        /* 隱藏滾動條 */
+        
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -45,6 +84,7 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
         /* 閃爍動畫 */
         @keyframes blink {
             0%, 100% { opacity: 1; }
@@ -57,54 +97,67 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between pb-8">
 
-    <!-- 頂部 Y2K 粉紅黃相間棋盤格裝飾條 -->
-    <div class="h-4 bg-repeat-x" style="background-image: linear-gradient(45deg, var(--y2k-pink) 25%, transparent 25%, transparent 75%, var(--y2k-pink) 75%, var(--y2k-pink)), linear-gradient(45deg, var(--y2k-pink) 25%, var(--y2k-yellow) 25%, var(--y2k-yellow) 75%, var(--y2k-pink) 75%, var(--y2k-pink)); background-size: 20px 20px; background-position: 0 0, 10px 10px; border-bottom: 3px solid black;"></div>
+    <!-- 頂部 Y2K 棋盤格裝飾條 (改用深海藍與蔚藍搭配) -->
+    <div class="h-4 bg-repeat-x" style="background-image: linear-gradient(45deg, var(--theme-accent-color) 25%, transparent 25%, transparent 75%, var(--theme-accent-color) 75%, var(--theme-accent-color)), linear-gradient(45deg, var(--theme-accent-color) 25%, var(--theme-bg) 25%, var(--theme-bg) 75%, var(--theme-accent-color) 75%, var(--theme-accent-color)); background-size: 20px 20px; background-position: 0 0, 10px 10px; border-bottom: 3px solid var(--theme-text);"></div>
 
-    <!-- 頂部 Header：致敬原圖高對比潮流霓虹排版 -->
+    <!-- 頂部 Header -->
     <header class="bg-transparent pt-6 pb-2 px-5 max-w-xl mx-auto w-full space-y-3">
-        <!-- 音樂、潮流、美酒三大主題標籤 -->
-        <div class="flex justify-center gap-3 text-[11px] font-black tracking-widest text-[#FF33B5] font-fredoka">
-            <span>✦ (MUSIC)</span>
-            <span>✦ (TRENDY)</span>
+        <div class="flex justify-center gap-3 text-[11px] font-black tracking-widest text-[#0284C7] font-fredoka">
+            <span>✦ (COASTAL)</span>
+            <span>✦ (OCEAN)</span>
             <span>✦ (LOVE)</span>
         </div>
         
         <div class="text-center space-y-1">
-            <!-- 芭比粉巨大手寫/斜體感標題 -->
-            <h1 class="text-5xl font-black italic tracking-tighter text-[#FF33B5] font-fredoka drop-shadow-[2px_2px_0px_#000000] uppercase">Seating Map</h1>
-            <!-- 綠色對稱底框的席位分布圖 -->
-            <div class="inline-block bg-[#39FFA0] border-3 border-black rounded-xl px-4 py-1.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <h1 class="text-5xl font-black italic tracking-tighter text-[#0284C7] font-fredoka drop-shadow-[2px_2px_0px_#0F172A] uppercase">Seating Map</h1>
+            <div class="inline-block bg-[#BAE6FD] border-2 border-black rounded-xl px-4 py-1.5 shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" id="title-badge">
                 <span class="text-base font-black tracking-wider text-black">【 席位分布圖 】</span>
             </div>
         </div>
 
-        <!-- 亮黃跑馬燈式橫幅 (娜魯灣大酒店 ． ) -->
-        <div class="bg-[#3CC0FF] border-3 border-black rounded-lg p-2 flex items-center justify-between shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] gap-2">
-            <div class="flex items-center gap-2">
-                <span class="text-xl">➔➔</span>
-                <span class="text-xs font-black tracking-wide text-black">娜魯灣大酒店 2F 娜魯灣廳  🥂</span>
+        <!-- 摺疊點擊導航橫幅 -->
+        <div class="space-y-2">
+            <button id="hotelToggleBtn" class="w-full bg-[#BAE6FD] border-3 border-black rounded-xl p-3 flex items-center justify-between shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-[2px]">
+                <span class="text-xs md:text-sm font-black text-black flex items-center gap-1.5">
+                    📍 娜路彎大酒店 2F 娜路彎廳 (點擊查看地圖/停車)
+                </span>
+                <span id="toggleArrow" class="text-xs font-black transition-transform duration-300">▼</span>
+            </button>
+            
+            <!-- 可摺疊資訊面板 (預設隱藏) -->
+            <div id="hotelInfoPanel" class="hidden p-4 bg-white border-3 border-black rounded-xl shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] space-y-3 text-left">
+                <div class="space-y-1">
+                    <p class="text-xs font-black text-slate-500 flex items-center gap-1">🗺️ GOOGLE地圖導航：</p>
+                    <a href="https://maps.app.goo.gl/zkvCM9mdJyvYG44G9" target="_blank" class="text-xs font-bold text-sky-600 underline break-all block hover:text-sky-800">
+                        https://maps.app.goo.gl/zkvCM9mdJyvYG44G9
+                    </a>
+                </div>
+                <div class="space-y-1 pt-2 border-t border-dashed border-slate-200">
+                    <p class="text-xs font-black text-slate-500 flex items-center gap-1">🚗 停車資訊：</p>
+                    <p class="text-xs font-bold text-slate-800">
+                        酒店設有地下停車場3層 (免費停放)
+                    </p>
+                </div>
             </div>
-            <!-- 可愛笑臉符號 -->
-            <div class="w-8 h-8 rounded-full bg-yellow-300 border-2 border-black flex items-center justify-center font-bold text-sm shrink-0">🙂</div>
         </div>
     </header>
 
     <main class="flex-grow max-w-xl mx-auto w-full px-5 py-3 space-y-5">
         
-        <!-- 搜尋區域（Y2K 厚邊框立體卡片） -->
-        <div class="bg-[#FCF9F5] p-5 rounded-2xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-3.5">
+        <!-- 搜尋區域 -->
+        <div class="theme-card p-5 space-y-3.5">
             <div class="flex items-center gap-2.5">
-                <div class="w-10 h-10 rounded-full bg-[#FF33B5] border-2 border-black flex items-center justify-center font-bold text-lg text-white">🔎</div>
+                <div class="w-10 h-10 rounded-full bg-[#0284C7] border-2 border-black flex items-center justify-center font-bold text-lg text-white" id="search-icon">🔎</div>
                 <div>
                     <h2 class="text-sm font-black tracking-wider text-black">快速定位席位 / SEARCH</h2>
-                    <p class="text-[10px] text-stone-500 font-bold">只需輸入姓名，立刻為您繪製專屬帶位路線！</p>
+                    <p class="text-[10px] text-slate-500 font-bold">只需輸入姓名，立刻為您繪製專屬帶位路線！</p>
                 </div>
             </div>
             
             <!-- 搜尋輸入框 -->
             <div class="relative flex items-center">
                 <input type="text" id="nameSearchInput" placeholder="請輸入姓名（例如：洪國憲、Sean）..." 
-                    class="w-full pl-4 pr-12 py-3 bg-white border-3 border-black rounded-xl focus:bg-[#39FFA0]/10 outline-none transition-all text-base text-black font-black tracking-wide">
+                    class="theme-input w-full pl-4 pr-12 py-3 outline-none text-base font-black tracking-wide">
                 
                 <!-- 清除按鈕 -->
                 <button id="clearSearchBtn" class="hidden absolute right-4 text-stone-400 hover:text-black p-1 rounded-full transition-colors">
@@ -115,16 +168,16 @@
             </div>
 
             <!-- 即時搜尋結果 -->
-            <div id="quickSearchResults" class="hidden max-h-[220px] overflow-y-auto divide-y-2 divide-black border-3 border-black rounded-xl bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div id="quickSearchResults" class="hidden max-h-[220px] overflow-y-auto divide-y-2 divide-black border-3 border-black rounded-xl bg-white shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
                 <!-- JS 即時生成項目 -->
             </div>
         </div>
 
-        <!-- 展廳平面配置圖 -->
-        <div class="bg-white p-4 rounded-2xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-2.5">
+        <!-- 平面配置圖 -->
+        <div class="theme-card p-4 space-y-2.5">
             <div class="flex justify-between items-center text-xs font-black tracking-wider">
-                <span class="bg-[#3CC0FF] px-2.5 py-1 border-2 border-black rounded shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">📍 娜魯灣廳配置圖 / FLOOR MAP</span>
-                <span class="md:hidden text-[#FF33B5] font-extrabold animate-blink flex items-center gap-1">左右滑動 ➔</span>
+                <span class="bg-[#BAE6FD] px-2.5 py-1 border-2 border-black rounded shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]" id="map-badge">📍 娜路彎廳配置圖 / FLOOR MAP</span>
+                <span class="md:hidden text-[#0284C7] font-extrabold flex items-center gap-1 animate-blink">左右滑動 ➔</span>
             </div>
             
             <!-- 畫布滾動區域 -->
@@ -135,39 +188,39 @@
             </div>
         </div>
 
-        <!-- 路線說明與帶位面板 (芭比粉高亮引導) -->
-        <div id="guideSection" class="bg-white p-5 rounded-2xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 min-h-[100px] flex flex-col justify-center">
+        <!-- 路線說明與帶位面板 -->
+        <div id="guideSection" class="theme-card p-5 transition-all duration-300 min-h-[100px] flex flex-col justify-center">
             <!-- 預設提示 -->
             <div id="guidePlaceholder" class="text-center py-4 text-stone-500 space-y-2">
                 <div class="text-3xl animate-bounce">✨</div>
                 <p class="text-sm font-black">在上方輸入姓名，或點選配置圖上的桌子</p>
-                <p class="text-[10px] text-stone-400 font-bold">我們將為您在 3D 舞台前畫出最流暢的帶位路線！</p>
+                <p class="text-[10px] text-slate-500 font-bold">我們將為您在 3D 舞台前畫出最流暢的帶位路線！</p>
             </div>
 
-            <!-- 啟動狀態（潮流卡片排版） -->
+            <!-- 啟動狀態 -->
             <div id="guideContent" class="hidden space-y-4">
-                <div class="flex justify-between items-start border-b-2 border-black pb-3">
+                <div class="flex justify-between items-start border-b-2 border-black pb-3" id="guide-header-border">
                     <div>
                         <div class="flex items-center gap-2">
                             <h3 id="targetTableName" class="text-2xl font-black text-black"></h3>
-                            <span id="targetTableBadge" class="text-[10px] px-2.5 py-0.5 rounded-lg border-2 border-black font-black tracking-widest uppercase"></span>
+                            <span id="targetTableBadge" class="text-[10px] px-2.5 py-1 rounded-lg border-2 border-black font-black tracking-widest uppercase bg-[#BAE6FD]"></span>
                         </div>
                     </div>
                     <div class="text-right">
-                        <span class="block text-[8px] font-black text-stone-400 tracking-wider">SUGGESTED ENTRANCE</span>
-                        <span id="suggestedEntrance" class="font-black text-xs text-[#FF33B5]"></span>
+                        <span class="block text-[8px] font-black text-slate-500 tracking-wider">SUGGESTED ENTRANCE</span>
+                        <span id="suggestedEntrance" class="font-black text-xs text-[#0284C7]"></span>
                     </div>
                 </div>
 
                 <!-- 路線指引卡片 -->
-                <div class="bg-[#39FFA0] p-4 rounded-xl border-3 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-0.5">
+                <div class="p-4 rounded-xl border-3 border-black shadow-[3px_3px_0px_0px_rgba(15,23,42,1)] space-y-0.5 bg-[#BAE6FD]" id="pathway-card">
                     <p class="text-[11px] font-black text-black flex items-center gap-1">🚶 快速帶位說明 / PATHWAY</p>
                     <p id="guideRouteText" class="text-xs leading-relaxed text-black font-bold"></p>
                 </div>
 
                 <!-- 同桌來賓 -->
                 <div class="space-y-2">
-                    <p class="text-[10px] font-black text-stone-500 tracking-widest">📋 同桌來賓名冊 / GUEST LIST</p>
+                    <p class="text-[10px] font-black text-slate-500 tracking-widest">📋 同桌來賓名冊 / GUEST LIST</p>
                     <div id="tableGuestList" class="flex flex-wrap gap-1.5 max-h-[120px] overflow-y-auto pr-1">
                         <!-- 由 JS 動態生成 -->
                     </div>
@@ -175,47 +228,52 @@
             </div>
         </div>
 
-        <!-- 席位總表（芭比粉背景、高對比立體黑卡片） -->
-        <div class="bg-[#FF33B5] p-5 rounded-2xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-5 text-white">
-            <div class="border-b-4 border-black pb-3 text-center">
+        <!-- 席位總表 -->
+        <div class="p-5 theme-card" id="register-container" style="background-color: #BAE6FD;">
+            <div class="border-b-4 border-black pb-3 text-center" id="register-header-border">
                 <h3 class="text-lg font-black tracking-widest text-black">✨ 婚宴席位名冊大覽 ✨</h3>
                 <p class="text-[10px] text-black font-bold mt-1">點擊下方任何桌號，配置圖會自動對應定位及導引</p>
             </div>
 
             <!-- 潮流方格排版 -->
-            <div id="classicTableList" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            <div id="classicTableList" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 pt-4">
                 <!-- JS 自動渲染名冊 -->
             </div>
         </div>
 
         <!-- 原圖致敬底部海報條款與說明 -->
-        <div class="bg-white p-5 rounded-2xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-3.5">
-            <p class="text-xs leading-relaxed text-black font-black">
+        <div class="theme-card p-5 space-y-3.5">
+            <p class="text-xs leading-relaxed font-black">
                 注：以上所有席位，皆為新人精心安排、溫馨保留，期待與您共同點燃這場幸福派對！💖
             </p>
-            <div class="flex items-center gap-3 border-t-2 border-black pt-3">
-                <!-- 偽 QR Code 代表裝飾區 -->
-                <div class="w-14 h-14 bg-black border-2 border-black shrink-0 flex flex-wrap p-0.5">
+            <div class="flex items-center gap-3 border-t-2 border-black pt-3" id="footer-border">
+                <div class="w-14 h-14 bg-black border-2 border-black shrink-0 flex flex-wrap p-0.5" id="mini-qrcode">
                     <div class="w-1/2 h-1/2 bg-white"></div>
                     <div class="w-1/2 h-1/2 bg-black"></div>
                     <div class="w-1/2 h-1/2 bg-black"></div>
                     <div class="w-1/2 h-1/2 bg-white"></div>
                 </div>
-                <div class="text-[10px] font-black text-stone-600 space-y-0.5">
-                    <p>期待與大家相見!</p>
+                <div class="text-[10px] font-black text-slate-600 space-y-0.5">
+                    <p>訂席聯絡：娜路彎宴會部 (089-239600)</p>
+                    <p>地址：台東市新興路250號 2F 娜路彎廳</p>
                 </div>
             </div>
         </div>
 
     </main>
 
-
+    <!-- 下方裝飾海報標籤 -->
+    <div class="max-w-xl mx-auto w-full px-5 grid grid-cols-3 gap-3 mb-6" id="bottom-pills-container">
+        <div class="bg-[#BAE6FD] border-2 border-black rounded-lg py-2.5 text-center font-black text-xs shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" id="pill-1">音樂療癒 🎵</div>
+        <div class="bg-white border-2 border-black rounded-lg py-2.5 text-center font-black text-xs shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" id="pill-2">潮流婚慶 🌟</div>
+        <div class="bg-[#BAE6FD] border-2 border-black rounded-lg py-2.5 text-center font-black text-xs shadow-[3px_3px_0px_0px_rgba(15,23,42,1)]" id="pill-3">幸福點燃 🥂</div>
     </div>
 
-    <div class="h-4 bg-repeat-x" style="background-image: linear-gradient(45deg, var(--y2k-pink) 25%, transparent 25%, transparent 75%, var(--y2k-pink) 75%, var(--y2k-pink)), linear-gradient(45deg, var(--y2k-pink) 25%, var(--y2k-yellow) 25%, var(--y2k-yellow) 75%, var(--y2k-pink) 75%, var(--y2k-pink)); background-size: 20px 20px; background-position: 0 0, 10px 10px; border-top: 3px solid black;"></div>
+    <!-- 底部 Y2K 棋盤格裝飾條 -->
+    <div id="checkered-bottom" class="h-4 bg-repeat-x" style="background-image: linear-gradient(45deg, var(--theme-accent-color) 25%, transparent 25%, transparent 75%, var(--theme-accent-color) 75%, var(--theme-accent-color)), linear-gradient(45deg, var(--theme-accent-color) 25%, var(--theme-bg) 25%, var(--theme-bg) 75%, var(--theme-accent-color) 75%, var(--theme-accent-color)); background-size: 20px 20px; background-position: 0 0, 10px 10px; border-top: 3px solid var(--theme-text);"></div>
 
     <script>
-        // 完全對應 婚宴席位圖.jpg 原始數據
+        // 完全對應 婚宴席位圖.jpg 原始數據 (娜魯灣全部取代為娜路彎)
         const tables = {
             "M": { id: "M", name: "主桌", english: "Main Table", type: "main", guests: ["洪國憲", "洪蘊美", "洪承緯", "劉書念", "劉偉祥", "劉榮子", "劉慶昌", "劉金蘭", "林國光", "余細美"], x: 195, y: 240, entrance: "left", guide: "從左側出入口進入後向左前行，舞台正前方雙重同心圓的尊榮舞台主桌即是。" },
             "2": { id: "2", name: "2", english: "Table Two", type: "guest", guests: ["陳進一", "李春金", "周秀玲", "李慶鳳", "謝春花", "李慶福", "李玉娟", "賴忠賢", "賴金英", "劉芝姍"], x: 340, y: 110, entrance: "left", guide: "從左側出入口進入後直走到底，最靠近舞台方向的第一排右側席位。" },
@@ -234,6 +292,24 @@
             "15": { id: "15", name: "15", english: "Table Fifteen (Backup)", type: "backup", guests: [], x: 715, y: 180, entrance: "right", guide: "位於右側進場口直走第四排靠牆席位（此桌目前安排為預備桌）。" }
         };
 
+        // 蔚藍海岸 (Coastal) 主題 Canvas 專屬色盤設定
+        const canvasConfig = {
+            bg: '#FFFFFF',
+            stroke: '#0F172A',
+            lineWidth: 2.5,
+            stageFill: '#E0F2FE',
+            boothFill: '#E0F2FE',
+            text: '#0F172A',
+            fontFamily: '"Noto Sans TC", sans-serif',
+            routeColor: '#0284C7',
+            routeWidth: 4,
+            routeDash: [6, 4],
+            tableNormalFill: '#FFFFFF',
+            tableSelectedFill: '#BAE6FD',
+            tableMainFill: '#FFFFFF',
+            tableMainSelectedFill: '#0284C7'
+        };
+
         let selectedTableId = null;
         let pulseStep = 0;
         let animationFrameId = null;
@@ -250,7 +326,23 @@
             drawMap();
             animatePulse();
 
-            // 搜尋框輸入事件
+            // 娜路彎大酒店 Toggle 折疊面板
+            const hotelToggleBtn = document.getElementById('hotelToggleBtn');
+            const hotelInfoPanel = document.getElementById('hotelInfoPanel');
+            const toggleArrow = document.getElementById('toggleArrow');
+
+            hotelToggleBtn.addEventListener('click', () => {
+                const isHidden = hotelInfoPanel.classList.contains('hidden');
+                if (isHidden) {
+                    hotelInfoPanel.classList.remove('hidden');
+                    toggleArrow.style.transform = 'rotate(180deg)';
+                } else {
+                    hotelInfoPanel.classList.add('hidden');
+                    toggleArrow.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // 搜尋輸入監聽
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value;
                 toggleClearButton(query);
@@ -265,10 +357,10 @@
                 searchInput.focus();
             });
 
-            // 點擊 Canvas 定位
+            // 點擊 Canvas
             canvas.addEventListener('click', handleCanvasClick);
             
-            // 點擊外部自動收合
+            // 點擊外部收合
             document.addEventListener('click', (e) => {
                 if (!searchInput.contains(e.target) && !quickResults.contains(e.target) && !clearSearchBtn.contains(e.target)) {
                     quickResults.classList.add('hidden');
@@ -284,7 +376,7 @@
             }
         }
 
-        // 搜尋演算法 (相容模糊匹配)
+        // 搜尋演算法
         function handleSearch(query) {
             const val = query.trim().toLowerCase();
             if (!val) {
@@ -303,20 +395,22 @@
 
             if (matches.length > 0) {
                 quickResults.classList.remove('hidden');
+                quickResults.className = "absolute left-0 right-0 z-40 max-h-[220px] overflow-y-auto mt-1 border-3 border-black bg-white shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] rounded-xl";
+                
                 quickResults.innerHTML = matches.map(m => `
                     <div onclick="selectGuest('${m.tableId}', '${m.name}')" 
-                        class="px-5 py-3.5 hover:bg-[#FFF600]/20 cursor-pointer flex justify-between items-center transition-colors active:bg-[#FFF600]/40">
+                        class="px-5 py-3 hover:bg-[#BAE6FD] cursor-pointer flex justify-between items-center transition-colors active:opacity-80">
                         <div>
                             <span class="font-black text-black text-sm">${m.name}</span>
                             <span class="text-[11px] text-stone-500 font-bold ml-2">於 ${m.tableName}</span>
                         </div>
-                        <span class="text-[11px] font-black text-white border-2 border-black px-2.5 py-0.5 bg-[#FF33B5] rounded shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">定位 ➔</span>
+                        <span class="text-[11px] font-black text-white border-2 border-black px-2.5 py-0.5 bg-[#0284C7] rounded shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]">定位 ➔</span>
                     </div>
                 `).join('');
             } else {
                 quickResults.classList.remove('hidden');
                 quickResults.innerHTML = `
-                    <div class="px-5 py-6 text-center text-stone-500 text-xs font-black">
+                    <div class="px-5 py-6 text-center text-stone-500 text-xs font-black bg-white">
                         未尋獲符合「${query}」的來賓席位
                     </div>
                 `;
@@ -328,7 +422,7 @@
             selectTable(tableId, guestName);
         }
 
-        // 渲染下半部完全還原「Y2K 潮流」名冊排版
+        // 渲染下半部席位列表
         function renderClassicTableList() {
             const container = document.getElementById('classicTableList');
             
@@ -341,20 +435,20 @@
                     const isBackup = t.type === 'backup';
                     
                     const badgeText = t.id === 'M' ? 'M' : t.id;
-                    const guestNames = isBackup ? '<span class="text-black/50 italic font-bold">( 預備席 / Reserved )</span>' : t.guests.join('、');
+                    const guestNames = isBackup ? '<span class="opacity-50 italic font-bold">( 預備席 / Reserved )</span>' : t.guests.join('、');
 
                     return `
                         <div id="listItem-${t.id}" onclick="selectTable('${t.id}')" 
-                            class="group cursor-pointer p-4 transition-all duration-300 rounded-xl border-3 border-black bg-white hover:bg-[#39FFA0] text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-hover:scale-[1.02]">
+                            class="group cursor-pointer p-4 transition-all duration-300 rounded-xl border-2 border-[#0F172A] bg-white hover:bg-[#BAE6FD] text-black shadow-[2px_2px_0px_0px_#0F172A]">
                             <div class="space-y-1.5">
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-xl font-black font-fredoka">${badgeText}</span>
-                                    <span class="text-[9px] text-[#FF33B5] font-black italic tracking-widest uppercase">${t.english}</span>
+                                    <span class="text-[9px] text-[#0284C7] font-black italic tracking-widest uppercase">${t.english}</span>
                                 </div>
                                 <div class="text-xs font-black">
                                     ${t.name === '主桌' ? '主桌席位名冊' : t.name + ' 號桌席'}
                                 </div>
-                                <p class="text-[11px] leading-relaxed text-stone-800 font-bold tracking-wide pt-1">
+                                <p class="text-[11px] leading-relaxed opacity-90 font-bold tracking-wide pt-1 text-slate-700">
                                     ${guestNames}
                                 </p>
                             </div>
@@ -369,7 +463,7 @@
             `;
         }
 
-        // 桌位點選
+        // 桌位點選定位
         function selectTable(id, highlightGuestName = null) {
             selectedTableId = id;
             const table = tables[id];
@@ -385,13 +479,10 @@
             const badge = document.getElementById('targetTableBadge');
             if (table.type === 'main') {
                 badge.innerText = "主桌 (STAGE VIP)";
-                badge.className = "text-[9px] px-2.5 py-1 rounded-lg border-2 border-black bg-[#FF33B5] text-white font-black tracking-widest uppercase";
             } else if (table.type === 'backup') {
                 badge.innerText = "預備桌席";
-                badge.className = "text-[9px] px-2.5 py-1 rounded-lg border-2 border-black bg-white text-stone-500 font-black tracking-widest uppercase";
             } else {
                 badge.innerText = "一般嘉賓席";
-                badge.className = "text-[9px] px-2.5 py-1 rounded-lg border-2 border-black bg-[#3CC0FF] text-black font-black tracking-widest uppercase";
             }
 
             document.getElementById('suggestedEntrance').innerText = table.entrance === 'left' ? '左入口' : '右入口';
@@ -403,22 +494,35 @@
                 guestListDiv.innerHTML = table.guests.map(g => {
                     const isHighlighted = highlightGuestName && g.includes(highlightGuestName);
                     return `
-                        <span class="px-2.5 py-1.5 rounded-lg border-2 border-black text-xs font-black transition-all duration-300 ${isHighlighted ? 'bg-[#FF33B5] text-white scale-105 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : 'bg-white text-black hover:bg-[#39FFA0]'}">
+                        <span class="px-2.5 py-1.5 rounded-lg border-2 border-[#0F172A] text-xs font-black transition-all duration-300 ${isHighlighted ? 'bg-[#0284C7] text-white scale-105 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : 'bg-white text-black hover:bg-[#BAE6FD]'}">
                             ${g}
                         </span>
                     `;
                 }).join('');
             } else {
-                guestListDiv.innerHTML = `<span class="text-stone-500 text-xs font-bold italic">（目前為預備席，可由現場婚顧人員調配）</span>`;
+                guestListDiv.innerHTML = `<span class="opacity-50 text-xs font-bold italic">（目前為預備席，可由現場婚顧人員調配）</span>`;
             }
 
-            // 2. 移動畫布
+            // 2. 移動畫布使目標桌位置中
             const wrapperWidth = canvasWrapper.clientWidth;
             const targetScrollX = table.x - (wrapperWidth / 2);
             canvasWrapper.scrollTo({
                 left: targetScrollX,
                 behavior: 'smooth'
             });
+
+            // 3. 高亮下方列表
+            document.querySelectorAll('[id^="listItem-"]').forEach(el => {
+                el.style.backgroundColor = '#FFFFFF';
+                el.style.transform = 'none';
+                el.style.boxShadow = '2px 2px 0px 0px #0F172A';
+            });
+            const activeListItem = document.getElementById(`listItem-${id}`);
+            if (activeListItem) {
+                activeListItem.style.backgroundColor = '#BAE6FD';
+                activeListItem.style.transform = 'scale(1.02)';
+                activeListItem.style.boxShadow = '4px 4px 0px 0px #0F172A';
+            }
 
             // 重新繪製地圖
             drawMap();
@@ -444,76 +548,84 @@
             }
         }
 
-        // 用 Canvas 完美呈現「Y2K 潮流酒吧與舞台」酷炫風格配置圖
+        // Canvas 繪製
         function drawMap() {
+            const cfg = canvasConfig;
+            
             ctx.clearRect(0, 0, 820, 500);
 
-            // 畫布白襯底
-            ctx.fillStyle = '#FFFFFF';
+            // 畫布襯底色
+            ctx.fillStyle = cfg.bg;
             ctx.fillRect(0, 0, 820, 500);
 
-            // 1. 舞台區域 (Stage) - 霓虹綠底
-            ctx.fillStyle = '#39FFA0';
+            // 1. 舞台區域 (Stage)
+            ctx.fillStyle = cfg.stageFill;
             ctx.fillRect(40, 80, 90, 290);
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 3;
+            ctx.strokeStyle = cfg.stroke;
+            ctx.lineWidth = cfg.lineWidth * 1.5;
             ctx.strokeRect(40, 80, 90, 290);
             
-            ctx.fillStyle = '#000000';
-            ctx.font = '900 16px "Noto Sans TC", sans-serif';
+            ctx.fillStyle = cfg.text;
+            ctx.font = '900 15px "Noto Sans TC", sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('舞 台', 85, 210);
-            ctx.font = '900 11px "Fredoka", sans-serif';
+            ctx.fillText('舞台', 85, 210);
+            
+            ctx.font = '900 10px "Fredoka", sans-serif';
             ctx.fillText('STAGE', 85, 235);
 
-            // 2. 音控室 (Sound Booth) - 蔚藍細框
-            ctx.fillStyle = '#3CC0FF';
+            // 2. 音控室 (Sound Booth)
+            ctx.fillStyle = cfg.boothFill;
             ctx.fillRect(40, 390, 90, 45);
             ctx.strokeRect(40, 390, 90, 45);
-            ctx.fillStyle = '#000000';
-            ctx.font = '900 12px "Noto Sans TC", sans-serif';
+            ctx.fillStyle = cfg.text;
+            ctx.font = '900 11px "Noto Sans TC", sans-serif';
             ctx.fillText('音控 BOOTH', 85, 412.5);
 
             // 3. 中央走道 (Walkway)
-            ctx.fillStyle = '#000000';
-            ctx.font = '900 15px "Noto Sans TC", sans-serif';
+            ctx.fillStyle = cfg.text;
+            ctx.font = '900 13px "Noto Sans TC", sans-serif';
             ctx.fillText('走道 / WAY', 480, 240);
 
             // 4. 下方出入口半圓 (Entrances)
-            // 左側出入口 (灰色半圓)
+            // 左側出入口
             ctx.fillStyle = '#E5E7EB';
             ctx.beginPath();
             ctx.arc(260, 475, 18, Math.PI, 0); // 半圓
             ctx.fill();
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 3;
+            ctx.strokeStyle = cfg.stroke;
+            ctx.lineWidth = cfg.lineWidth;
             ctx.stroke();
             
-            ctx.fillStyle = '#000000';
-            ctx.font = '900 12px "Noto Sans TC", sans-serif';
+            ctx.fillStyle = cfg.text;
+            ctx.font = '900 11px "Noto Sans TC", sans-serif';
             ctx.fillText('▲ 入口', 260, 442);
 
-            // 右側進場口 (芭比粉半圓)
-            ctx.fillStyle = '#FF33B5'; // 芭比霓虹粉
+            // 右側進場口
+            ctx.fillStyle = '#FF33B5'; // 亮粉紅
             ctx.beginPath();
             ctx.arc(590, 475, 18, Math.PI, 0);
             ctx.fill();
+            ctx.strokeStyle = cfg.stroke;
             ctx.stroke();
             
-            ctx.fillStyle = '#000000';
+            ctx.fillStyle = cfg.text;
             ctx.fillText('▲ 進場口', 590, 442);
 
-            // 5. 動態導航虛線 (芭比粉紅色粗虛線)
+            // 5. 動態導航路徑
             if (selectedTableId) {
                 const target = tables[selectedTableId];
                 const startX = target.entrance === 'left' ? 260 : 590;
                 const startY = 450;
 
                 ctx.beginPath();
-                ctx.strokeStyle = '#FF33B5';
-                ctx.lineWidth = 4;
-                ctx.setLineDash([6, 5]);
+                ctx.strokeStyle = cfg.routeColor;
+                ctx.lineWidth = cfg.routeWidth;
+                if (cfg.routeDash && cfg.routeDash.length > 0) {
+                    ctx.setLineDash(cfg.routeDash);
+                } else {
+                    ctx.setLineDash([]);
+                }
                 ctx.moveTo(startX, startY);
 
                 if (target.y < 240) {
@@ -533,30 +645,30 @@
                 const isSelected = selectedTableId === table.id;
                 const radius = table.type === 'main' ? 36 : 26;
 
-                // 選取時的外呼吸圈 (芭比粉)
+                // 選取時的外呼吸圈
                 if (isSelected) {
                     ctx.beginPath();
                     ctx.arc(table.x, table.y, radius + 5 + Math.sin(pulseStep) * 2.5, 0, Math.PI * 2);
-                    ctx.strokeStyle = '#FF33B5';
-                    ctx.lineWidth = 3;
-                    ctx.fillStyle = 'rgba(255, 51, 181, 0.25)';
+                    ctx.strokeStyle = cfg.routeColor;
+                    ctx.lineWidth = cfg.lineWidth;
+                    ctx.fillStyle = 'rgba(2, 132, 199, 0.15)';
                     ctx.fill();
                     ctx.stroke();
                 }
 
-                // 桌位主體：粗線框、若點選則填充潮流黃色，主桌填充芭比粉
+                // 桌位主體
                 ctx.beginPath();
                 ctx.arc(table.x, table.y, radius, 0, Math.PI * 2);
                 
                 if (table.type === 'main') {
-                    ctx.fillStyle = isSelected ? '#FF33B5' : '#FFF600';
+                    ctx.fillStyle = isSelected ? cfg.tableMainSelectedFill : cfg.tableMainFill;
                 } else {
-                    ctx.fillStyle = isSelected ? '#39FFA0' : '#FFFFFF';
+                    ctx.fillStyle = isSelected ? cfg.tableSelectedFill : cfg.tableNormalFill;
                 }
                 ctx.fill();
                 
-                ctx.strokeStyle = '#000000';
-                ctx.lineWidth = isSelected ? 4 : 2.5;
+                ctx.strokeStyle = isSelected ? cfg.routeColor : cfg.stroke;
+                ctx.lineWidth = isSelected ? cfg.lineWidth * 1.5 : cfg.lineWidth;
                 ctx.stroke();
 
                 // 主桌雙線圈設計
@@ -566,8 +678,8 @@
                     ctx.stroke();
                 }
 
-                // 桌號與名稱
-                ctx.fillStyle = '#000000';
+                // 桌號與名稱文字
+                ctx.fillStyle = cfg.text;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
 
@@ -586,7 +698,7 @@
             });
         }
 
-        // 地圖選取呼吸特效動畫
+        // 動態脈衝特效
         function animatePulse() {
             pulseStep += 0.08;
             drawMap();
