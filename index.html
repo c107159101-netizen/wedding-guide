@@ -224,9 +224,9 @@
         // 完全對應 婚宴席位圖.jpg 原始數據 (娜路彎名稱修正)
         const tables = {
             "M": { id: "M", name: "主桌", english: "Main Table", type: "main", guests: ["洪國憲", "洪蘊美", "洪承緯", "劉書念", "劉偉祥", "劉榮子", "劉慶昌", "劉金蘭", "林國光", "余細美"], x: 195, y: 240, entrance: "left", guide: "從左側出入口進入後向左前行，舞台正前方雙重同心圓的尊榮舞台主桌即是。" },
-            "2": { id: "2", name: "2", english: "Table Two", type: "guest", guests: ["陳進一", "李春金", "周秀玲", "李慶鳳", "謝春花", "李慶福", "李玉娟", "賴忠賢", "賴金英", "劉芝姍"], x: 340, y: 110, entrance: "left", guide: "從左側出入口進入，沿走道直走到底，最靠近舞台方向的第一排右側席位。" },
+            "2": { id: "2", name: "2", english: "Table Two", type: "guest", guests: ["陳進一", "李春金", "周秀玲", "李慶鳳", "謝春花", "李慶福", "李玉娟", "劉芝姍", "鄒文中", "鄒淑惠"], x: 340, y: 110, entrance: "left", guide: "從左側出入口進入，沿走道直走到底，最靠近舞台方向的第一排右側席位。" },
             "3": { id: "3", name: "3", english: "Table Three", type: "guest", guests: ["潘金花", "劉慶榮", "劉宸維", "劉睿哲", "潘秋麗", "石剛位", "劉慶星夫妻", "王文賓夫妻"], x: 340, y: 180, entrance: "left", guide: "從左側出入口進入，沿走道直行，位於主桌正後方第一排的左側席位。" },
-            "4": { id: "4", name: "4", english: "Table Four", type: "guest", guests: ["林新禧", "吳青芬", "林新智", "陳育卿", "林品諺", "林品誠", "劉書亞", "張智堯", "鄒文中", "鄒淑惠"], x: 340, y: 300, entrance: "left", guide: "由左側出入口進入後右轉中央走道，左手邊第二排第一桌（靠中央走道）。" },
+            "4": { id: "4", name: "4", english: "Table Four", type: "guest", guests: ["林新禧", "吳青芬", "林新智", "陳育卿", "林品諺", "林品誠", "劉書亞", "張智堯", "賴忠賢", "賴金英"], x: 340, y: 300, entrance: "left", guide: "由左側出入口進入後右轉中央走道，左手邊第二排第一桌（靠中央走道）。" },
             "5": { id: "5", name: "5", english: "Table Five", type: "guest", guests: ["胡安生", "胡傑倫", "胡志豪", "胡雁容", "張湘濤", "張林梅", "蘇裕淵", "蘇燕萍", "蘇愛真", "蘇愛理"], x: 340, y: 370, entrance: "left", guide: "從左側出入口進入即達，靠近大門左側起算的第一張桌位。" },
             "6": { id: "6", name: "6", english: "Table Six", type: "guest", guests: ["洪啟翔", "洪萱舫", "洪浩程", "洪鐿綺", "黃鼎安", "幸秉憲", "幸敏環", "莊信雄", "莊綺蘐"], x: 465, y: 110, entrance: "left", guide: "由左側出入口進入直走，到中央走道後左轉，位於第二排最內側。" },
             "7": { id: "7", name: "7", english: "Table Seven", type: "guest", guests: ["劉凱逸", "劉兆葦", "高智誠", "田詩妤", "李俊福", "李傑瑞", "高路得", "蘇秀蓮", "廖惠如", "曾淑玲"], x: 465, y: 180, entrance: "left", guide: "由左側出入口進入，位於中央紅毯走道左側的第二排席位。" },
@@ -236,7 +236,7 @@
             "11": { id: "11", name: "11", english: "Table Eleven", type: "guest", guests: ["楊綵湄", "塗綰葶", "陳姿涵", "許霈晴", "蔡汶邦", "周柄君", "吳宇賰", "吳岱融", "李霈晴", "丁元閔"], x: 590, y: 180, entrance: "right", guide: "由右側進場口直行跨過走道，位於中央走道右側的第三排。" },
             "12": { id: "12", name: "12", english: "Table Twelve", type: "guest", guests: ["李星華", "李政偉", "李惠敏", "鍾宇平", "鍾心敏", "許舒涵", "林景麗", "黃瑄", "何寧禎", "黃竫評"], x: 590, y: 300, entrance: "right", guide: "由右側進場口進入直走，位於中央走道右側第三排（偏外側位置）。" },
             "13": { id: "13", name: "13", english: "Table Thirteen", type: "guest", guests: ["林睿凡", "林汶其", "黃隆盛", "張智超", "張嘉樺", "牟明柔", "陳映綺", "李詩璇", "莊思華", "莊思語"], x: 590, y: 370, entrance: "right", guide: "由右側進場口進入，右手邊最靠近主要入口的第三列席次。" },
-            "14": { id: "14", name: "14", english: "Table Fourteen", type: "guest", guests: ["林文宇", "林茜晨", "何友彰", "莊榮國", "莊春妹", "林金文", "林保暻", "高志祥", "高惠珍", "吳惠玲"], x: 715, y: 110, entrance: "right", guide: "由右側進場口進入直走到底，最靠近舞台與右側外端牆面交界的第四排位置。" },
+            "14": { id: "14", name: "14", english: "Table Fourteen", type: "guest", guests: ["林文宇", "林茜晨", "何友彰", "莊榮國", "莊春妹", "林金文", "林保暻", "吳惠玲", "王俊傑", "江心愛"], x: 715, y: 110, entrance: "right", guide: "由右側進場口進入直走到底，最靠近舞台與右側外端牆面交界的第四排位置。" },
             "15": { id: "15", name: "15", english: "Table Fifteen (Backup)", type: "backup", guests: [], x: 715, y: 180, entrance: "right", guide: "位於右側進場口直走第四排靠牆席位（此桌目前安排為預備桌）。" }
         };
 
