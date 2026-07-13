@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>婚宴席位表 | 娜路彎大酒店 (台東蔚藍版)</title>
+    <title>婚宴席位表 | 娜路彎大酒店 (台東蔚藍報到版)</title>
     <!-- 引入 Tailwind CSS 與 Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
@@ -86,13 +86,13 @@
 
     <main class="flex-grow max-w-xl mx-auto w-full px-5 py-3 space-y-5">
         
-        <!-- 搜尋區域 -->
+        <!-- 搜尋與報到區域 -->
         <div class="bg-white p-5 rounded-2xl border-4 border-[var(--ocean-indigo)] shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] space-y-3.5">
             <div class="flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-full bg-[var(--coastal-blue)] border-2 border-black flex items-center justify-center font-bold text-sm text-white">🔎</div>
                 <div>
-                    <h2 class="text-xs font-black tracking-wider text-[var(--ocean-indigo)]">快速尋找席位 / SEARCH</h2>
-                    <p class="text-[9px] text-stone-500 font-bold">輸入您的姓名，一秒為您在地圖上畫出無阻礙帶位路線！</p>
+                    <h2 class="text-xs font-black tracking-wider text-[var(--ocean-indigo)]">尋找席位 & 賓客報到 / SEARCH & CHECK-IN</h2>
+                    <p class="text-[9px] text-stone-500 font-bold">輸入您的姓名，報到後即可在地圖上畫出帶位路線！</p>
                 </div>
             </div>
             
@@ -172,9 +172,13 @@
 
         <!-- 席位總表 -->
         <div class="bg-white p-5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] space-y-5 text-black">
-            <div class="border-b-2 border-black pb-3 text-center">
+            <div class="border-b-2 border-black pb-3 text-center relative">
                 <h3 class="text-base font-black tracking-widest text-black">✨ 婚宴席位名冊大覽 ✨</h3>
                 <p class="text-[9px] text-stone-500 font-bold mt-1">點擊下方任何桌號，配置圖會自動對應定位及導引</p>
+                <!-- 報到重置按鈕 (工作人員後台專用) -->
+                <button onclick="resetAllCheckIns()" class="absolute right-0 top-0 text-[9px] border border-stone-300 hover:border-red-500 px-2 py-1 rounded text-stone-400 hover:text-red-500 transition-all font-bold">
+                    重置報到 🔄
+                </button>
             </div>
 
             <!-- 網格排版 -->
@@ -183,46 +187,74 @@
             </div>
         </div>
 
+        <!-- 聖經金句祝福卡片 -->
+    <div class="theme-card p-6 text-center space-y-3 bg-white border-3 border-black shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] rounded-xl">
+        <span class="text-2xl">🕊️</span>
+        <p class="text-sm md:text-base font-bold tracking-wider leading-relaxed text-[#0F172A] px-2">
+            「兩個人比一個人好，因為一起辛勤工作，共享美好的收穫。」
+        </p>
+        <p class="text-xs font-black text-slate-500">— 傳道書 4:9</p>
+        <div class="w-12 h-[1px] bg-slate-200 mx-auto my-1"></div>
+        <p class="text-[11px] italic font-medium leading-relaxed text-slate-500 max-w-sm mx-auto sans-font">
+            "Two are better than one because they had a good reward for their hard work." <span class="not-italic font-black text-slate-400">— Ec 4:9</span>
+        </p>
+    </div>
 
-        <!-- 原圖致敬底部海報說明 -->
-        <div class="bg-white p-5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] space-y-3.5">
-            <p class="text-[11px] leading-relaxed text-black font-black">
-                期待在台東與您相見!
-            </p>
-            <p class="text-[11px] leading-relaxed text-black font-black">
-                注：若有任何疑問，請找現場尋找配戴掛牌的工作人員
-            </p>
-
-
+    <!-- 原圖致敬底部海報說明 -->
+    <div class="bg-white p-5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] space-y-3.5">
+        <p class="text-[11px] leading-relaxed text-black font-black">
+            注：以上所有席位，皆為新人精心安排、溫馨保留，期待與您共同點燃這場幸福派對！💖
+        </p>
+        <div class="flex items-center gap-3 border-t-2 border-black pt-3">
+            <div class="text-[10px] font-black text-stone-500 space-y-0.5">
+                <p>訂席聯絡：娜路彎宴會部 (089-239600)</p>
+                <p>地址：台東市新興路250號 2F 娜路彎廳</p>
             </div>
         </div>
+    </div>
 
-        <!-- 聖經金句祝福卡片 -->
-        <div class="theme-card p-6 text-center space-y-3 bg-white border-3 border-black shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] rounded-xl">
-            <span class="text-2xl">🕊️</span>
-            <p class="text-sm md:text-base font-bold tracking-wider leading-relaxed text-[#0F172A] px-2">
-                「兩個人比一個人好，因為一起辛勤工作，共享美好的收穫。」
-            </p>
-            <p class="text-xs font-black text-slate-500">— 傳道書 4:9</p>
-            <div class="w-12 h-[1px] bg-slate-200 mx-auto my-1"></div>
-            <p class="text-[11px] italic font-medium leading-relaxed text-slate-500 max-w-sm mx-auto sans-font">
-                "Two are better than one because they had a good reward for their hard work." <span class="not-italic font-black text-slate-400">— Ec 4:9</span>
-            </p>
+</main>
+
+<!-- 密碼重置確認彈窗 -->
+<div id="resetPasswordModal" class="hidden fixed inset-0 bg-[#0F172A]/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-2xl border-4 border-[#0F172A] shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] w-full max-w-sm space-y-4">
+        <div class="text-center space-y-1">
+            <span class="text-3xl">🔑</span>
+            <h3 class="text-base font-black text-[#0F172A] tracking-wider">重置報到安全驗證</h3>
+            <p class="text-[10px] text-stone-400 font-bold sans-font">請輸入工作人員密碼以清除所有報到紀錄</p>
+        </div>
+        
+        <div class="space-y-1">
+            <input type="password" id="resetPasswordInput" placeholder="請輸入密碼..." 
+                class="w-full px-4 py-2.5 bg-stone-50 border-2 border-[#0F172A] rounded-xl outline-none focus:bg-sky-50 transition-all text-center text-lg font-black tracking-widest text-[#0F172A]">
+            <p id="passwordErrorMsg" class="hidden text-[10px] text-red-600 font-black text-center">❌ 密碼錯誤，請重新輸入</p>
         </div>
 
-    </main>
+        <div class="flex gap-2.5 pt-1">
+            <button onclick="closeResetModal()" class="w-1/2 py-2 border-2 border-black rounded-xl font-bold text-xs bg-stone-100 hover:bg-stone-200 transition-all text-[#0F172A]">
+                取消
+            </button>
+            <button onclick="submitResetPassword()" class="w-1/2 py-2 border-2 border-black rounded-xl font-black text-xs bg-red-500 text-white hover:bg-red-600 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none">
+                確認重置
+            </button>
+        </div>
+    </div>
+</div>
 
-    <!-- 底部資訊 -->
-    <footer class="text-center py-6 mt-6 border-t border-stone-200 max-w-xl mx-auto w-full px-5">
+<!-- 吐司通知容器 -->
+<div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none w-11/12 max-w-sm"></div>
+
+<!-- 底部資訊 -->
+<footer class="text-center py-6 mt-6 border-t border-stone-200 max-w-xl mx-auto w-full px-5">
         <div class="space-y-1">
-            <p class="font-black tracking-[0.35em] text-[10px] text-[var(--ocean-indigo)]">緯~我們想念你嚕!</p>
-            <p class="text-[8px] text-stone-400">© 座位導覽系統</p>
+            <p class="font-black tracking-[0.35em] text-[10px] text-[var(--ocean-indigo)]">JANE-LOVE ART WEDDING EXHIBIT</p>
+            <p class="text-[8px] text-stone-400">© 娜路彎大酒店 2F 娜路彎廳 | 席位即時導航系統</p>
         </div>
     </footer>
 
     <script>
-        // 完全對應 婚宴席位圖.jpg 原始數據 (娜路彎名稱修正)
-        const tables = {
+    // 完全對應 娜路彎大酒店 2F 娜路彎廳
+    const tables = {
             "M": { id: "M", name: "主桌", english: "Main Table", type: "main", guests: ["洪國憲", "洪蘊美", "洪承緯", "劉書念", "劉偉祥", "劉榮子", "劉慶昌", "劉金蘭", "林國光", "余細美"], x: 195, y: 240, entrance: "left", guide: "從左側出入口進入後向左前行，舞台正前方雙重同心圓的尊榮舞台主桌即是。" },
             "2": { id: "2", name: "2", english: "Table Two", type: "guest", guests: ["陳進一", "李春金", "周秀玲", "李慶鳳", "謝春花", "李慶福", "李玉娟", "劉芝姍", "鄒文中", "鄒淑惠"], x: 340, y: 110, entrance: "left", guide: "從左側出入口進入，沿走道直走到底，最靠近舞台方向的第一排右側席位。" },
             "3": { id: "3", name: "3", english: "Table Three", type: "guest", guests: ["潘金花", "劉慶榮", "劉宸維", "劉睿哲", "潘秋麗", "石剛位", "劉慶星夫妻", "王文賓夫妻"], x: 340, y: 180, entrance: "left", guide: "從左側出入口進入，沿走道直行，位於主桌正後方第一排的左側席位。" },
@@ -238,51 +270,59 @@
             "13": { id: "13", name: "13", english: "Table Thirteen", type: "guest", guests: ["林睿凡", "林汶其", "黃隆盛", "張智超", "張嘉樺", "牟明柔", "陳映綺", "李詩璇", "莊思華", "莊思語"], x: 590, y: 370, entrance: "right", guide: "由右側進場口進入，右手邊最靠近主要入口的第三列席次。" },
             "14": { id: "14", name: "14", english: "Table Fourteen", type: "guest", guests: ["林文宇", "林茜晨", "何友彰", "莊榮國", "莊春妹", "林金文", "林保暻", "吳惠玲", "王俊傑", "江心愛"], x: 715, y: 110, entrance: "right", guide: "由右側進場口進入直走到底，最靠近舞台與右側外端牆面交界的第四排位置。" },
             "15": { id: "15", name: "15", english: "Table Fifteen (Backup)", type: "backup", guests: [], x: 715, y: 180, entrance: "right", guide: "位於右側進場口直走第四排靠牆席位（此桌目前安排為預備桌）。" }
-        };
 
+        // 從 LocalStorage 載入已報到的賓客
+        let checkedInGuests = JSON.parse(localStorage.getItem('wedding_checked_in') || '[]');
         let selectedTableId = null;
         let pulseStep = 0;
         let animationFrameId = null;
 
         const canvas = document.getElementById('responsiveCanvas');
-        const ctx = canvas.getContext('2d');
-        const searchInput = document.getElementById('nameSearchInput');
-        const clearSearchBtn = document.getElementById('clearSearchBtn');
-        const quickResults = document.getElementById('quickSearchResults');
-        const canvasWrapper = document.getElementById('canvasWrapper');
+    const ctx = canvas.getContext('2d');
+    const searchInput = document.getElementById('nameSearchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const quickResults = document.getElementById('quickSearchResults');
+    const canvasWrapper = document.getElementById('canvasWrapper');
 
-        function init() {
-            renderClassicTableList();
-            drawMap();
-            animatePulse();
+    function init() {
+        renderClassicTableList();
+        drawMap();
+        animatePulse();
 
-            // 搜尋框輸入監聽
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value;
-                toggleClearButton(query);
-                handleSearch(query);
-            });
+        // 搜尋框輸入監聽
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value;
+            toggleClearButton(query);
+            handleSearch(query);
+        });
 
-            // 清除按鈕
-            clearSearchBtn.addEventListener('click', () => {
-                searchInput.value = '';
-                toggleClearButton('');
+        // 清除按鈕
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            toggleClearButton('');
+            quickResults.classList.add('hidden');
+            searchInput.focus();
+        });
+
+        // 監聽密碼驗證輸入框的 Enter 鍵
+        document.getElementById('resetPasswordInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                submitResetPassword();
+            }
+        });
+
+        // 點擊 Canvas
+        canvas.addEventListener('click', handleCanvasClick);
+        
+        // 點擊外部收合搜尋下拉選單
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !quickResults.contains(e.target) && !clearSearchBtn.contains(e.target)) {
                 quickResults.classList.add('hidden');
-                searchInput.focus();
-            });
+            }
+        });
+    }
 
-            // 點擊 Canvas
-            canvas.addEventListener('click', handleCanvasClick);
-            
-            // 點擊外部收合
-            document.addEventListener('click', (e) => {
-                if (!searchInput.contains(e.target) && !quickResults.contains(e.target) && !clearSearchBtn.contains(e.target)) {
-                    quickResults.classList.add('hidden');
-                }
-            });
-        }
-
-        // 展開 / 收合地圖與停車資訊面板
+    // 展開 / 收合地圖與停車資訊面板
         function toggleInfoPanel() {
             const panel = document.getElementById('info-panel');
             const arrow = document.getElementById('arrow-icon');
@@ -303,7 +343,7 @@
             }
         }
 
-        // 搜尋演算法 (相容模糊匹配)
+        // 搜尋與報到整合演算法
         function handleSearch(query) {
             const val = query.trim().toLowerCase();
             if (!val) {
@@ -322,16 +362,26 @@
 
             if (matches.length > 0) {
                 quickResults.classList.remove('hidden');
-                quickResults.innerHTML = matches.map(m => `
-                    <div onclick="selectGuest('${m.tableId}', '${m.name}')" 
-                        class="px-5 py-3.5 hover:bg-sky-50 cursor-pointer flex justify-between items-center transition-colors active:bg-sky-100">
-                        <div>
-                            <span class="font-bold text-black text-sm">${m.name}</span>
-                            <span class="text-[11px] text-stone-500 font-bold ml-2">於 ${m.tableName}</span>
+                quickResults.innerHTML = matches.map(m => {
+                    const isChecked = checkedInGuests.includes(m.name);
+                    const checkInBtnHtml = isChecked 
+                        ? `<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-300 px-2.5 py-1 rounded shadow-sm">已報到 ✓</span>`
+                        : `<button onclick="event.stopPropagation(); doCheckIn('${m.name}', '${m.tableId}')" class="text-[10px] font-black text-white border-2 border-black px-2.5 py-1 bg-amber-500 rounded hover:bg-amber-600 shadow-[1px_1px_0px_0px_rgba(15,23,42,1)] active:translate-y-0.5 active:shadow-none transition-all">點此報到 ✍️</button>`;
+
+                    return `
+                        <div onclick="selectGuest('${m.tableId}', '${m.name}')" 
+                            class="px-5 py-3.5 hover:bg-sky-50 cursor-pointer flex justify-between items-center transition-colors active:bg-sky-100">
+                            <div>
+                                <span class="font-bold text-black text-sm">${m.name}</span>
+                                <span class="text-[11px] text-stone-500 font-bold ml-2">於 ${m.tableName}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                ${checkInBtnHtml}
+                                <span class="text-[11px] font-black text-white border-2 border-black px-2.5 py-1 bg-[var(--coastal-blue)] rounded shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]">定位 ➔</span>
+                            </div>
                         </div>
-                        <span class="text-[11px] font-black text-white border-2 border-black px-2.5 py-0.5 bg-[var(--coastal-blue)] rounded shadow-[1px_1px_0px_0px_rgba(15,23,42,1)]">定位 ➔</span>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             } else {
                 quickResults.classList.remove('hidden');
                 quickResults.innerHTML = `
@@ -342,12 +392,121 @@
             }
         }
 
+        // 執行報到邏輯
+    function doCheckIn(guestName, tableId) {
+        if (!checkedInGuests.includes(guestName)) {
+            checkedInGuests.push(guestName);
+            localStorage.setItem('wedding_checked_in', JSON.stringify(checkedInGuests));
+            
+            showToast(`✨ ${guestName} 報到成功！歡迎蒞臨！`, 'success');
+            
+            // 重新渲染畫面
+            renderClassicTableList();
+            if (selectedTableId) {
+                selectTable(selectedTableId);
+            }
+            
+            // 刷新搜尋結果
+            const currentQuery = searchInput.value;
+            if (currentQuery) {
+                handleSearch(currentQuery);
+            }
+        }
+    }
+
+    // 重置所有報到資料 (開啟密碼驗證彈窗)
+    function resetAllCheckIns() {
+        if (checkedInGuests.length === 0) {
+            showToast("目前尚無任何報到資料 🕊️", "info");
+            return;
+        }
+        
+        // 初始化密碼彈窗
+        document.getElementById('resetPasswordInput').value = '';
+        document.getElementById('passwordErrorMsg').classList.add('hidden');
+        document.getElementById('resetPasswordModal').classList.remove('hidden');
+        
+        // 自動聚焦於輸入框
+        setTimeout(() => {
+            document.getElementById('resetPasswordInput').focus();
+        }, 100);
+    }
+
+    // 關閉密碼驗證彈窗
+    function closeResetModal() {
+        document.getElementById('resetPasswordModal').classList.add('hidden');
+    }
+
+    // 提交密碼驗證並執行清除
+    function submitResetPassword() {
+        const passwordVal = document.getElementById('resetPasswordInput').value.trim();
+        
+        if (passwordVal === '1914') {
+            // 密碼正確：清除資料並給予回饋
+            checkedInGuests = [];
+            localStorage.removeItem('wedding_checked_in');
+            
+            showToast("已成功重置所有報到紀錄 🔄", "success");
+            
+            // 重新渲染畫面與搜尋結果
+            renderClassicTableList();
+            if (selectedTableId) {
+                selectTable(selectedTableId);
+            }
+            
+            const currentQuery = searchInput.value;
+            if (currentQuery) {
+                handleSearch(currentQuery);
+            }
+            
+            closeResetModal();
+        } else {
+            // 密碼錯誤：顯示錯誤訊息並全選文字方便重新輸入
+            document.getElementById('passwordErrorMsg').classList.remove('hidden');
+            document.getElementById('resetPasswordInput').select();
+        }
+    }
+
+    // 建立精美的 Toast 通知
+    function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let bgClass = "bg-white border-emerald-500 text-stone-800";
+            let icon = "✅";
+            if (type === 'info') {
+                bgClass = "bg-white border-sky-500 text-stone-800";
+                icon = "ℹ️";
+            }
+            
+            toast.className = `p-4 rounded-xl border-l-4 shadow-[4px_4px_12px_rgba(0,0,0,0.1)] flex items-center gap-3 transition-all duration-300 translate-y-2 opacity-0 bg-white border-stone-800 pointer-events-auto ${bgClass}`;
+            toast.innerHTML = `
+                <span class="text-lg">${icon}</span>
+                <span class="text-xs font-black tracking-wide">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // 進場動畫
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+            
+            // 退場動畫與刪除
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-[-10px]');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
         function selectGuest(tableId, guestName) {
             quickResults.classList.add('hidden');
             selectTable(tableId, guestName);
         }
 
-        // 渲染下半部名冊
+        // 渲染下半部名冊 (報到者將以粗體、海鹽藍色與底線標記)
         function renderClassicTableList() {
             const container = document.getElementById('classicTableList');
             
@@ -360,7 +519,20 @@
                     const isBackup = t.type === 'backup';
                     
                     const badgeText = t.id === 'M' ? 'M' : t.id;
-                    const guestNames = isBackup ? '<span class="text-stone-400 italic font-bold">( 預備席 / Reserved )</span>' : t.guests.join('、');
+                    
+                    // 將嘉賓名單中的報到者轉換為粗體藍色加底線標記
+                    let guestNamesHtml = '';
+                    if (isBackup) {
+                        guestNamesHtml = '<span class="text-stone-400 italic font-bold">( 預備席 / Reserved )</span>';
+                    } else {
+                        guestNamesHtml = t.guests.map(g => {
+                            const isChecked = checkedInGuests.includes(g);
+                            if (isChecked) {
+                                return `<span class="font-black text-[var(--coastal-blue)] underline decoration-2 decoration-[var(--coastal-blue)]" title="已報到">${g}</span>`;
+                            }
+                            return `<span>${g}</span>`;
+                        }).join('、');
+                    }
 
                     return `
                         <div id="listItem-${t.id}" onclick="selectTable('${t.id}')" 
@@ -374,7 +546,7 @@
                                     ${t.name === '主桌' ? '主桌席位名冊' : t.name + ' 號桌席'}
                                 </div>
                                 <p class="text-[11px] leading-relaxed text-stone-600 font-medium tracking-wide pt-1">
-                                    ${guestNames}
+                                    ${guestNamesHtml}
                                 </p>
                             </div>
                         </div>
@@ -416,14 +588,23 @@
             document.getElementById('suggestedEntrance').innerText = table.entrance === 'left' ? '左入口 (灰半圓)' : '右進場口 (粉紅半圓)';
             document.getElementById('guideRouteText').innerText = table.guide;
 
-            // 來賓姓名名單
+            // 同桌來賓名單 (已報到者名字旁附上「✓」號)
             const guestListDiv = document.getElementById('tableGuestList');
             if (table.guests.length > 0) {
                 guestListDiv.innerHTML = table.guests.map(g => {
                     const isHighlighted = highlightGuestName && g.includes(highlightGuestName);
+                    const isChecked = checkedInGuests.includes(g);
+                    
+                    let bgClass = "bg-white text-black";
+                    if (isHighlighted) {
+                        bgClass = "bg-[var(--coastal-blue)] text-white scale-105 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]";
+                    } else if (isChecked) {
+                        bgClass = "bg-emerald-50 text-emerald-800 border-emerald-400";
+                    }
+
                     return `
-                        <span class="px-2.5 py-1.5 rounded-lg border-2 border-[var(--ocean-indigo)] text-xs font-bold transition-all duration-300 ${isHighlighted ? 'bg-[var(--coastal-blue)] text-white scale-105 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]' : 'bg-white text-black'}">
-                            ${g}
+                        <span class="px-2.5 py-1.5 rounded-lg border-2 border-[var(--ocean-indigo)] text-xs font-bold transition-all duration-300 ${bgClass}">
+                            ${g}${isChecked ? ' ✓' : ''}
                         </span>
                     `;
                 }).join('');
@@ -508,7 +689,7 @@
             ctx.font = 'bold 13px "Noto Sans TC", sans-serif';
             ctx.fillText('走道', 480, 240);
 
-            // 4. 下方出入口半圓 (Entrances) - 座標重塑對齊走道中線
+            // 4. 下方出入口半圓 - 座標重塑對齊走道中線
             // 左側出入口 (避障 Corridor 中線 X = 402.5)
             ctx.fillStyle = '#E5E7EB';
             ctx.beginPath();
@@ -536,7 +717,7 @@
             if (selectedTableId) {
                 const target = tables[selectedTableId];
                 const startX = target.entrance === 'left' ? 402.5 : 527.5;
-                const startY = 460; // 避開出入口半圓，使線段最乾淨
+                const startY = 460; // 避開出入口半圓
                 const radius = target.type === 'main' ? 36 : 26;
 
                 ctx.beginPath();
