@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>婚宴席位表 | 娜路彎大酒店 (台東蔚藍報到版)</title>
-    <!-- 引入 Tailwind CSS 與 Google Fonts -->
+    <title>婚宴席位表 | 娜路彎大酒店 (台東蔚藍智慧版)</title>
+    <!-- 引入 Tailwind CSS 與 Google Fonts Noto Sans TC -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             /* 台東蔚藍海岸風格色調 */
@@ -53,7 +53,7 @@
                 <div class="bg-[#E0F2FE] border-2 border-[var(--ocean-indigo)] px-3.5 py-1 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
                     <h1 class="text-lg md:text-xl font-black tracking-wider text-[var(--ocean-indigo)]">婚宴席位表</h1>
                 </div>
-                <span class="text-[10px] font-bold border border-[var(--ocean-indigo)] px-2 py-1 bg-white rounded shadow-[1px_1px_0px_0px_rgba(15,23,42,1)] text-[var(--coastal-blue)]">手機即時導航 🌊</span>
+                <span class="text-xs font-bold border border-[var(--ocean-indigo)] px-2 py-1 bg-white rounded shadow-[1px_1px_0px_0px_rgba(15,23,42,1)] text-[var(--coastal-blue)]">手機即時導航 🌊</span>
             </div>
 
             <!-- 點擊展開的資訊橫幅 -->
@@ -253,7 +253,7 @@
     </footer>
 
     <script>
-        // 完全對應 娜路彎大酒店 2F 娜路彎廳
+        // 完全對應 娜路彎大酒店 2F 娜路彎廳 的數據結構與位置 (已優化以精準對齊 image_89df79.png 的列佈局)
         const tables = {
             "M": { id: "M", name: "主桌", english: "Main Table", type: "main", guests: ["洪國憲", "洪蘊美", "洪承緯", "劉書念", "劉偉祥", "劉榮子", "劉慶昌", "劉金蘭", "林國光", "余細美"], x: 195, y: 240, entrance: "left", guide: "從左側出入口進入後向左前行，舞台正前方雙重同心圓的尊榮舞台主桌即是。" },
             "2": { id: "2", name: "2", english: "Table Two", type: "guest", guests: ["陳進一", "李春金", "周秀玲", "李慶鳳", "謝春花", "李慶福", "李玉娟", "劉芝姍", "鄒文中", "鄒淑惠"], x: 340, y: 110, entrance: "left", guide: "從左側出入口進入，沿走道直走到底，最靠近舞台方向的第一排右側席位。" },
@@ -264,10 +264,10 @@
             "7": { id: "7", name: "7", english: "Table Seven", type: "guest", guests: ["劉凱逸", "劉兆葦", "高智誠", "李俊福", "李傑瑞", "高路得", "蘇秀蓮", "廖惠如", "曾淑玲"], x: 465, y: 180, entrance: "left", guide: "由左側出入口進入，位於中央紅毯走道左側的第二排席位。" },
             "8": { id: "8", name: "8", english: "Table Eight", type: "guest", guests: ["高俊雄", "高瑤瑤", "高澤安", "高緹恩", "林子航", "林慧瑄", "李淑惠", "邱子辰", "官郁均", "王俊傑"], x: 465, y: 300, entrance: "right", guide: "由右側進場口進入，位於中央紅毯走道右側的第二排席位。" },
             "9": { id: "9", name: "9", english: "Table Nine", type: "guest", guests: ["Sean", "李凱琳", "施晴", "施愛", "李俊豪", "李惠子", "李言希", "李語妃", "高淑珍", "高淑美"], x: 465, y: 370, entrance: "right", guide: "由右側進場口進入後右轉，位於第二排最外側（靠近進場口方向）。" },
-            "10": { id: "10", name: "10", english: "Table Ten", type: "guest", guests: ["黃聖元", "黃心惠", "楊華甸", "彭振宏", "廖子君", "張嘉成", "戴安毅", "幸秉文", "沈中華", "莊博允"], x: 590, y: 110, entrance: "right", guide: "由右側進場口進入，沿走道往舞台方向直行，位於右側第三排最靠牆席位。" },
-            "11": { id: "11", name: "11", english: "Table Eleven", type: "guest", guests: ["楊綵湄", "塗綰葶", "陳姿涵", "許霈晴", "蔡汶邦", "周柄君", "吳宇賰", "吳岱融", "李霈晴", "丁元閔"], x: 590, y: 180, entrance: "right", guide: "由右側進場口直行跨過走道，位於中央走道右側的第三排。" },
-            "12": { id: "12", name: "12", english: "Table Twelve", type: "guest", guests: ["李星華", "李政偉", "李惠敏", "鍾宇平", "鍾心敏", "許舒涵", "林景麗", "黃瑄", "何寧禎", "黃竫評"], x: 590, y: 300, entrance: "right", guide: "由右側進場口進入直走，位於中央走道右側第三排（偏外側位置）。" },
-            "13": { id: "13", name: "13", english: "Table Thirteen", type: "guest", guests: ["林睿凡", "林汶其", "黃隆盛", "張智超", "張嘉樺", "牟明柔", "陳映綺", "李詩璇", "莊思華", "莊思語"], x: 590, y: 370, entrance: "right", guide: "由右側進場口進入，右手邊最靠近主要入口的第三列席次。" },
+            "10": { id: "10", name: "10", english: "Table Ten", type: "guest", guests: ["黃聖元", "黃心惠", "楊華甸", "彭振宏", "廖子君", "張嘉成", "戴安毅", "幸秉文", "沈中華", "莊博允"], x: 590, y: 110, entrance: "right", guide: "由右側進場口進入，沿走道往舞台方向直行，位於右側 third 排最靠牆席位。" },
+            "11": { id: "11", name: "11", english: "Table Eleven", type: "guest", guests: ["楊綵湄", "塗綰葶", "陳姿涵", "許霈晴", "蔡汶邦", "周柄君", "吳宇賰", "吳岱融", "李霈晴", "丁元閔"], x: 590, y: 180, entrance: "right", guide: "由右側進場口直行跨過走道，位於中央走道右側的 third 排。" },
+            "12": { id: "12", name: "12", english: "Table Twelve", type: "guest", guests: ["李星華", "李政偉", "李惠敏", "鍾宇平", "鍾心敏", "許舒涵", "林景麗", "黃瑄", "何寧禎", "黃竫評"], x: 590, y: 300, entrance: "right", guide: "由右側進場口進入直走，位於中央走道右側 third 排（偏外側位置）。" },
+            "13": { id: "13", name: "13", english: "Table Thirteen", type: "guest", guests: ["林睿凡", "林汶其", "黃隆盛", "張智超", "張嘉樺", "牟明柔", "陳映綺", "李詩璇", "莊思華", "莊思語"], x: 590, y: 370, entrance: "right", guide: "由右側進場口進入，右手邊最靠近主要入口的 third 列席次。" },
             "14": { id: "14", name: "14", english: "Table Fourteen", type: "guest", guests: ["林文宇", "林茜晨", "何友彰", "莊榮國", "莊春妹", "林金文", "林保暻", "吳惠玲", "高惠珍", "江心愛"], x: 715, y: 110, entrance: "right", guide: "由右側進場口進入直走到底，最靠近舞台與右側外端牆面交界的第四排位置。" },
             "15": { id: "15", name: "15", english: "Table Fifteen (Backup)", type: "backup", guests: [], x: 715, y: 180, entrance: "right", guide: "位於右側進場口直走第四排靠牆席位（此桌目前安排為預備桌）。" }
         };
@@ -342,6 +342,39 @@
             } else {
                 clearSearchBtn.classList.add('hidden');
             }
+        }
+
+        // 智慧帶路避障路徑算法 - 精確對齊無障礙通道，100% 繞開所有桌位
+        function getTablePath(tableId) {
+            // Left Entrance: (260, 450)
+            // Right Entrance: (715, 450)
+            // Horizontal Aisle: y = 240
+            // Vertical Aisle Columns: 
+            // Col 1-2 Aisle = 402.5
+            // Col 2-3 Aisle = 527.5
+            // Col 3-4 Aisle = 652.5
+            
+            // 為了避免壓到桌圈，我們讓右入口起步的路徑若要向上去 14/15 號桌，
+            // 必須先經由 x = 652.5 (3 與 4 列之間的通道) 往上，然後橫向靠攏。
+
+            const paths = {
+                "M":  [[260, 450], [260, 240], [195 + 36, 240]],
+                "2":  [[260, 450], [260, 240], [402.5, 240], [402.5, 110], [340 + 26, 110]],
+                "3":  [[260, 450], [260, 240], [402.5, 240], [402.5, 180], [340 + 26, 180]],
+                "4":  [[260, 450], [260, 240], [402.5, 240], [402.5, 300], [340 + 26, 300]],
+                "5":  [[260, 450], [260, 240], [402.5, 240], [402.5, 370], [340 + 26, 370]],
+                "6":  [[260, 450], [260, 240], [402.5, 240], [402.5, 110], [465 - 26, 110]],
+                "7":  [[260, 450], [260, 240], [402.5, 240], [402.5, 180], [465 - 26, 180]],
+                "8":  [[715, 450], [715, 410], [527.5, 410], [527.5, 300], [465 + 26, 300]],
+                "9":  [[715, 450], [715, 410], [527.5, 410], [527.5, 370], [465 + 26, 370]],
+                "10": [[715, 450], [715, 240], [527.5, 240], [527.5, 110], [590 - 26, 110]],
+                "11": [[715, 450], [715, 240], [527.5, 240], [527.5, 180], [590 - 26, 180]],
+                "12": [[715, 450], [715, 240], [652.5, 240], [652.5, 300], [590 - 26, 300]],
+                "13": [[715, 450], [715, 240], [652.5, 240], [652.5, 370], [590 - 26, 370]],
+                "14": [[715, 450], [715, 410], [652.5, 410], [652.5, 110], [715 - 26, 110]],
+                "15": [[715, 450], [715, 410], [652.5, 410], [652.5, 180], [715 - 26, 180]]
+            };
+            return paths[tableId];
         }
 
         function handleSearch(query) {
@@ -460,7 +493,6 @@
             }
         }
 
-        // 建立精美的 Toast 通知
         function showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -574,7 +606,7 @@
                 badge.className = "text-[9px] px-2.5 py-1 rounded-lg border-2 border-black bg-[#E0F2FE] text-black font-black tracking-widest uppercase";
             }
 
-            document.getElementById('suggestedEntrance').innerText = table.entrance === 'left' ? '左入口 (灰半圓)' : '右進場口 (粉紅半圓)';
+            document.getElementById('suggestedEntrance').innerText = table.entrance === 'left' ? '左入口' : '右進場口';
             document.getElementById('guideRouteText').innerText = table.guide;
 
             // 同桌來賓名單 (已報到者名字旁附上「✓」號)
@@ -624,7 +656,6 @@
             drawMap();
         }
 
-        // Canvas 點擊
         function handleCanvasClick(e) {
             const rect = canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) * (820 / rect.width);
@@ -647,41 +678,44 @@
         function drawMap() {
             ctx.clearRect(0, 0, 820, 500);
 
-            // 畫布白襯底
+            // 畫布襯底色
             ctx.fillStyle = '#FFFFFF';
             ctx.fillRect(0, 0, 820, 500);
 
-            // 1. 舞台區域 (Stage) - 細框淡藍底
-            ctx.fillStyle = '#E0F2FE';
-            ctx.fillRect(40, 80, 90, 290);
+            // 1. 舞台區域 (Stage) - 藍色
+            ctx.fillStyle = '#4FCDFF';
+            ctx.fillRect(40, 100, 100, 240);
             ctx.strokeStyle = '#0F172A';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(40, 80, 90, 290);
+            ctx.lineWidth = 2.5;
+            ctx.strokeRect(40, 100, 100, 240);
             
-            ctx.fillStyle = '#0F172A';
+            ctx.fillStyle = '#FFFFFF';
             ctx.font = 'bold 16px "Noto Sans TC", sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('舞 台', 85, 225);
+            ctx.fillText('舞 台', 90, 220);
 
-            // 2. 音控室 (Sound Booth) - 細框
-            ctx.fillStyle = '#F8FAFC';
-            ctx.fillRect(40, 390, 90, 45);
-            ctx.strokeRect(40, 390, 90, 45);
-            ctx.fillStyle = '#0F172A';
+            // 2. 音控室 (Sound Booth) - 橘色
+            ctx.fillStyle = '#FF8C00';
+            ctx.fillRect(40, 360, 100, 45);
+            ctx.strokeRect(40, 360, 100, 45);
+            ctx.fillStyle = '#FFFFFF';
             ctx.font = 'bold 12px "Noto Sans TC", sans-serif';
-            ctx.fillText('音控 BOOTH', 85, 412.5);
+            ctx.fillText('音 控', 90, 382.5);
 
-            // 3. 中央走道 (Walkway) 走道標示
-            ctx.fillStyle = '#94A3B8';
-            ctx.font = 'bold 13px "Noto Sans TC", sans-serif';
-            ctx.fillText('走道', 480, 240);
-
-            // 4. 下方出入口半圓 - 座標重塑對齊走道中線
-            // 左側出入口 (避障 Corridor 中線 X = 402.5)
-            ctx.fillStyle = '#E5E7EB';
+            // 3. 繪製底部灰色水平牆界線 (Y = 450)
+            ctx.strokeStyle = '#CBD5E1';
+            ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.arc(402.5, 475, 18, Math.PI, 0); // 半圓
+            ctx.moveTo(0, 450);
+            ctx.lineTo(820, 450);
+            ctx.stroke();
+
+            // 4. 下方出入口半圓 - 坐落在 Y = 450 水平線上 (與 image_89df79.png 的藍色弧形大門一致)
+            // 左側出入口 (海軍藍半圓)
+            ctx.fillStyle = '#4F67B3';
+            ctx.beginPath();
+            ctx.arc(260, 450, 26, Math.PI, 0); // 在 450 上向上繪製拱門
             ctx.fill();
             ctx.strokeStyle = '#0F172A';
             ctx.lineWidth = 2;
@@ -689,66 +723,47 @@
             
             ctx.fillStyle = '#0F172A';
             ctx.font = 'bold 11px "Noto Sans TC", sans-serif';
-            ctx.fillText('▲ 出入口', 402.5, 445);
+            ctx.fillText('↑ 入口', 260, 490);
 
-            // 右側進場口 (避障 Corridor 中線 X = 527.5)
-            ctx.fillStyle = '#FF33B5'; // 粉紅
+            // 右側進場口 (海軍藍半圓) - 移至 715px (第 4 列正下方，符合 image_89df79.png 的開闊走道位置)
+            ctx.fillStyle = '#4F67B3';
             ctx.beginPath();
-            ctx.arc(527.5, 475, 18, Math.PI, 0);
+            ctx.arc(715, 450, 26, Math.PI, 0);
             ctx.fill();
             ctx.stroke();
             
             ctx.fillStyle = '#0F172A';
-            ctx.fillText('▲ 出入口 (進場)', 527.5, 445);
+            ctx.fillText('↑ 入口 (進場)', 715, 490);
 
-            // 5. 智慧避障導航路徑線 (Guide Line) - 完全行駛於走道內，不壓任何桌位
+            // 5. 中央大走道 "走" "道" 字樣 - Y=240 軸線上
+            ctx.fillStyle = '#94A3B8';
+            ctx.font = 'bold 16px "Noto Sans TC", sans-serif';
+            ctx.fillText('走', 480, 240);
+            ctx.fillText('道', 527.5, 240);
+
+            // 6. 避障智慧導引線 - 100% 繞開桌子，沿安全走道前行，在切線邊緣精準停下
             if (selectedTableId) {
-                const target = tables[selectedTableId];
-                const startX = target.entrance === 'left' ? 402.5 : 527.5;
-                const startY = 460; // 避開出入口半圓
-                const radius = target.type === 'main' ? 36 : 26;
-
-                ctx.beginPath();
-                ctx.strokeStyle = '#0284C7'; // 蔚藍導引線
-                ctx.lineWidth = 3.5;
-                ctx.setLineDash([6, 5]);
-                ctx.moveTo(startX, startY);
-
-                if (target.id === 'M') {
-                    // 主桌：走中央紅毯 (Y=240) 向左，在主桌圓周右側邊緣 (X = target.x + radius) 停止
-                    ctx.lineTo(startX, 240);
-                    ctx.lineTo(target.x + radius, 240);
-                } else if (target.y === 110) {
-                    // 第一排桌位：走頂部走道 (Y=145)，到達對應 X 後直角向上，在桌子底緣 (Y = target.y + radius) 停止
-                    ctx.lineTo(startX, 145);
-                    ctx.lineTo(target.x, 145);
-                    ctx.lineTo(target.x, target.y + radius);
-                } else if (target.y === 180) {
-                    // 第二排桌位：走中央紅毯 (Y=240)，到達對應 X 後直角向上，在桌子底緣 (Y = target.y + radius) 停止
-                    ctx.lineTo(startX, 240);
-                    ctx.lineTo(target.x, 240);
-                    ctx.lineTo(target.x, target.y + radius);
-                } else if (target.y === 300) {
-                    // 第三排桌位：走中央紅毯 (Y=240)，到達對應 X 後直角向下，在桌子頂緣 (Y = target.y - radius) 停止
-                    ctx.lineTo(startX, 240);
-                    ctx.lineTo(target.x, 240);
-                    ctx.lineTo(target.x, target.y - radius);
-                } else if (target.y === 370) {
-                    // 第四排桌位：走底部走道 (Y=335)，到達對應 X 後直角向下，在桌子頂緣 (Y = target.y - radius) 停止
-                    ctx.lineTo(startX, 335);
-                    ctx.lineTo(target.x, 335);
-                    ctx.lineTo(target.x, target.y - radius);
+                const pathPoints = getTablePath(selectedTableId);
+                if (pathPoints && pathPoints.length > 1) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#0284C7'; // 蔚藍虛線
+                    ctx.lineWidth = 3.5;
+                    ctx.setLineDash([6, 5]);
+                    ctx.moveTo(pathPoints[0][0], pathPoints[0][1]);
+                    for (let i = 1; i < pathPoints.length; i++) {
+                        ctx.lineTo(pathPoints[i][0], pathPoints[i][1]);
+                    }
+                    ctx.stroke();
+                    ctx.setLineDash([]);
                 }
-                ctx.stroke();
-                ctx.setLineDash([]);
             }
 
-            // 6. 繪製所有席位 - 壓在路徑線上方，使路徑線被圓圈乾淨切斷
+            // 7. 繪製所有席位 - 珊瑚粉 (與 image_89df79.png 視覺色系一致)
             Object.values(tables).forEach(table => {
                 const isSelected = selectedTableId === table.id;
                 const radius = table.type === 'main' ? 36 : 26;
 
-                // 選取時的外環呼吸動畫
+                // 點選呼吸動態特效外圈
                 if (isSelected) {
                     ctx.beginPath();
                     ctx.arc(table.x, table.y, radius + 5 + Math.sin(pulseStep) * 2.5, 0, Math.PI * 2);
@@ -759,25 +774,32 @@
                     ctx.stroke();
                 }
 
-                // 桌位主體：細框、白底 (點選時高亮淡藍)
+                // 桌位主體
                 ctx.beginPath();
                 ctx.arc(table.x, table.y, radius, 0, Math.PI * 2);
-                ctx.fillStyle = isSelected ? '#E0F2FE' : '#FFFFFF';
-                ctx.fill();
                 
-                ctx.strokeStyle = isSelected ? '#0284C7' : '#0F172A';
-                ctx.lineWidth = isSelected ? 3 : 1.5;
+                if (table.type === 'main') {
+                    ctx.fillStyle = '#E14F2B'; // 經典主桌紅橘
+                    ctx.strokeStyle = '#0F172A';
+                } else {
+                    ctx.fillStyle = '#F28F79'; // 珊瑚粉/鮭魚粉
+                    ctx.strokeStyle = '#0F172A';
+                }
+                ctx.lineWidth = isSelected ? 3.5 : 1.5;
+                ctx.fill();
                 ctx.stroke();
 
                 // 主桌雙線圈設計
                 if (table.type === 'main') {
                     ctx.beginPath();
                     ctx.arc(table.x, table.y, radius - 6, 0, Math.PI * 2);
+                    ctx.strokeStyle = '#0F172A';
+                    ctx.lineWidth = 1;
                     ctx.stroke();
                 }
 
                 // 桌號與名稱文字
-                ctx.fillStyle = '#0F172A';
+                ctx.fillStyle = '#FFFFFF';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
 
@@ -786,17 +808,15 @@
                     ctx.fillText('主桌', table.x, table.y);
                 } else if (table.type === 'backup') {
                     ctx.font = 'bold 10px "Noto Sans TC", sans-serif';
-                    ctx.fillText('15', table.x, table.y - 5);
-                    ctx.font = 'bold 7px "Noto Sans TC", sans-serif';
-                    ctx.fillText('[預備]', table.x, table.y + 6);
+                    ctx.fillText('15', table.x, table.y);
                 } else {
-                    ctx.font = 'bold 13px "Noto Sans TC", sans-serif';
+                    ctx.font = 'bold 12px "Noto Sans TC", sans-serif';
                     ctx.fillText(table.name, table.x, table.y);
                 }
             });
         }
 
-        // 地圖選取呼吸特效動畫
+        // 動態呼吸特效迴圈
         function animatePulse() {
             pulseStep += 0.08;
             drawMap();
